@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>선릉역 하이퍼블릭 | 강남 엘리트 ELITE</title>
+<meta name="description" content="선릉역 하이퍼블릭 강남 엘리트. 선릉역 1번 출구 도보 5분. 강남 최저가, 평균 출근 매니저 200명 이상, 365일 연중무휴 24시간 운영.">
+<meta name="keywords" content="선릉역 하이퍼블릭, 선릉역 접대, 선릉역 퍼블릭, 선릉역 가라오케, 강남 하이퍼블릭, 대치동 하이퍼블릭, 선릉역 룸싸롱">
+<meta property="og:title" content="선릉역 하이퍼블릭 | 강남 엘리트">
+<meta property="og:description" content="선릉역 1번 출구 도보 5분. 강남 최저가 하이퍼블릭.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seolleung-elite.com">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://seolleung-elite.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.hero {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; position:relative; overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background-image:url('https://static.wixstatic.com/media/ee8a66_5239b728d7e94a82b125d1073c6a2b49~mv2.png/v1/fill/w_979,h_504,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/ellite.png');
+  background-size:cover; background-position:center; filter:brightness(0.2);
+}
+.hero-bg::after {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,169,110,0.12) 0%, transparent 70%);
+}
+.hero-content { position:relative; z-index:2; padding:2rem; }
+.hero-badge {
+  display:inline-block; background:rgba(201,169,110,0.15);
+  border:1px solid rgba(201,169,110,0.3); color:var(--gold);
+  font-size:0.72rem; letter-spacing:0.3em; padding:0.4rem 1.2rem;
+  margin-bottom:2rem; opacity:0; animation:fadeUp 1s ease 0.2s forwards;
+}
+.hero-sub {
+  font-family:'Cormorant Garamond',serif; font-size:0.9rem;
+  letter-spacing:0.5em; color:var(--gold); margin-bottom:1rem;
+  opacity:0; animation:fadeUp 1s ease 0.4s forwards;
+}
+.hero-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,9vw,6.5rem); font-weight:400;
+  line-height:1.0; color:var(--white); letter-spacing:0.05em;
+  margin-bottom:0.5rem; opacity:0; animation:fadeUp 1s ease 0.6s forwards;
+}
+.hero-title em { font-style:italic; color:var(--gold); }
+.hero-title-kr {
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(0.9rem,2.5vw,1.3rem);
+  letter-spacing:0.4em; color:var(--text-muted); margin-bottom:2.5rem;
+  opacity:0; animation:fadeUp 1s ease 0.8s forwards;
+}
+.hero-divider { width:60px; height:1px; background:var(--gold); margin:0 auto 2rem; opacity:0; animation:fadeUp 1s ease 1s forwards; }
+.hero-desc { font-size:0.88rem; color:var(--text-muted); max-width:480px; line-height:2.2; letter-spacing:0.05em; margin-bottom:2.5rem; opacity:0; animation:fadeUp 1s ease 1.2s forwards; }
+.hero-cta { display:inline-flex; gap:1rem; opacity:0; animation:fadeUp 1s ease 1.4s forwards; }
+.btn-gold { background:var(--gold); color:var(--black); padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; font-weight:500; transition:all 0.3s; }
+.btn-gold:hover { background:var(--gold-light); }
+.btn-outline { border:1px solid var(--gold); color:var(--gold); padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; transition:all 0.3s; }
+.btn-outline:hover { background:rgba(201,169,110,0.1); }
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+.access-bar { background:var(--dark2); border-top:1px solid rgba(201,169,110,0.1); border-bottom:1px solid rgba(201,169,110,0.1); padding:1.5rem 2rem; display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; }
+.access-item { display:flex; align-items:center; gap:0.8rem; font-size:0.8rem; color:var(--text-muted); }
+.access-item strong { color:var(--gold); }
+
+.about-section { max-width:1100px; margin:0 auto; padding:6rem 2rem; }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.about-text p { color:var(--text-muted); font-size:0.9rem; line-height:2.2; margin-bottom:1.5rem; }
+.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(201,169,110,0.15); }
+.stat-box { background:var(--dark2); padding:2.5rem; text-align:center; }
+.stat-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:600; color:var(--gold); line-height:1; display:block; }
+.stat-label { font-size:0.75rem; letter-spacing:0.15em; color:var(--text-muted); margin-top:0.5rem; display:block; }
+
+.features-wrap { background:var(--dark2); }
+.features-inner { max-width:1100px; margin:0 auto; padding:6rem 2rem; }
+.features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
+.feature-card { border:1px solid rgba(201,169,110,0.15); padding:2.5rem 2rem; transition:border-color 0.3s; }
+.feature-card:hover { border-color:rgba(201,169,110,0.4); }
+.feature-icon { font-size:1.5rem; color:var(--gold); margin-bottom:1.2rem; display:block; }
+.feature-title { font-family:'Noto Serif KR',serif; font-size:1.05rem; font-weight:600; color:var(--white); margin-bottom:0.8rem; }
+.feature-desc { font-size:0.82rem; color:var(--text-muted); line-height:2; }
+.feature-card-img { background-size:cover; background-position:center; position:relative; overflow:hidden; padding:0; border:none; }
+.feature-card-overlay { position:relative; z-index:2; padding:2.5rem 2rem; background:linear-gradient(to top, rgba(10,10,10,0.92) 60%, rgba(10,10,10,0.5) 100%); min-height:220px; display:flex; flex-direction:column; justify-content:flex-end; }
+
+.quick-links { max-width:1100px; margin:0 auto; padding:5rem 2rem; }
+.quick-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(201,169,110,0.15); margin-top:3rem; }
+.quick-card { background:var(--dark); padding:2.5rem 2rem; text-decoration:none; text-align:center; transition:background 0.3s; display:block; }
+.quick-card:hover { background:var(--dark2); }
+.quick-icon { font-size:2rem; display:block; margin-bottom:1rem; }
+.quick-name { font-family:'Noto Serif KR',serif; font-size:1rem; color:var(--white); margin-bottom:0.5rem; display:block; }
+.quick-desc { font-size:0.75rem; color:var(--text-muted); line-height:1.8; }
+.quick-arrow { display:block; color:var(--gold); margin-top:1rem; font-size:0.8rem; letter-spacing:0.2em; }
+
+@media (max-width:768px) {
+  .about-grid { grid-template-columns:1fr; gap:3rem; }
+  .features-grid { grid-template-columns:1fr; }
+  .quick-grid { grid-template-columns:repeat(2,1fr); }
+  .access-bar { gap:1.5rem; }
+  .hero-cta { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ELITE</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">홈</a></li>
+    <li><a href="price.html">가격안내</a></li>
+    <li><a href="hours.html">영업시간</a></li>
+    <li><a href="blog.html">블로그</a></li>
+    <li><a href="location.html">오시는 길</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:010-8145-1911" class="nav-tel">📞 예약문의</a>
+    <button class="nav-hamburger" onclick="toggleDrawer(this)"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" class="active">홈</a>
+  <a href="price.html">가격안내</a>
+  <a href="hours.html">영업시간</a>
+  <a href="blog.html">블로그</a>
+  <a href="location.html">오시는 길</a>
+  <a href="tel:010-8145-1911" class="drawer-tel">📞 010-8145-1911</a>
+</div>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">선릉역 1번 출구 도보 5분</div>
+    <p class="hero-sub">SEOLLEUNG · HIGHPUBLIC · PREMIUM</p>
+    <h1 class="hero-title"><em>Elite</em></h1>
+    <p class="hero-title-kr">선릉역 하이퍼블릭 엘리트</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">선릉역 최인접 프리미엄 하이퍼블릭.<br>강남 최저가 · 365일 연중무휴 · 평균 출근 매니저 200명 이상</p>
+    <div class="hero-cta">
+      <a href="tel:010-8145-1911" class="btn-gold">예약 문의</a>
+      <a href="price.html" class="btn-outline">가격 안내</a>
+    </div>
+  </div>
+</div>
+
+<div class="access-bar">
+  <div class="access-item"><span>🚇</span><span>2호선 선릉역 <strong>1번 출구 도보 5분</strong></span></div>
+  <div class="access-item"><span>🚗</span><span>무료 <strong>발렛파킹</strong> 제공</span></div>
+  <div class="access-item"><span>⏰</span><span><strong>365일 연중무휴</strong> 24시간</span></div>
+  <div class="access-item"><span>📞</span><span><strong>010-8145-1911</strong></span></div>
+</div>
+
+<section class="about-section">
+  <div class="about-grid">
+    <div class="about-text">
+      <span class="section-label">ABOUT ELITE</span>
+      <h2 class="section-title">선릉역 바로 옆<br>프리미엄 하이퍼블릭</h2>
+      <div class="section-divider"></div>
+      <p>선릉역 하이퍼블릭 엘리트는 2호선 선릉역 1번 출구에서 도보 5분 거리에 위치한 강남 대표 프리미엄 하이퍼블릭입니다.</p>
+      <p>선릉역 일대 강남구 대치동과 역삼동을 중심으로, 비즈니스 접대부터 특별한 자리까지 완벽하게 어울리는 공간을 제공합니다.</p>
+      <p>강남 최저가로 타 가게와 비교해보세요!</p>
+    </div>
+    <div>
+      <div class="about-stats">
+        <div class="stat-box"><span class="stat-num">200+</span><span class="stat-label">평균 출근 매니저</span></div>
+        <div class="stat-box"><span class="stat-num">365</span><span class="stat-label">연중무휴</span></div>
+        <div class="stat-box"><span class="stat-num">24H</span><span class="stat-label">운영시간</span></div>
+        <div class="stat-box"><span class="stat-num">5분</span><span class="stat-label">선릉역 도보</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="features-wrap">
+  <div class="features-inner">
+    <span class="section-label">WHY ELITE</span>
+    <h2 class="section-title">엘리트만의 특별함</h2>
+    <div class="section-divider"></div>
+    <div class="features-grid">
+      <div class="feature-card"><span class="feature-icon">💎</span><p class="feature-title">강남 최저가 가성비</p><p class="feature-desc">제일 저렴한 금액으로 가성비 있게 즐기실 수 있습니다. 타 가게와 비교불가!</p></div>
+      <div class="feature-card feature-card-img" style="background-image:url('https://static.wixstatic.com/media/ee8a66_ffb64eb23a1c44d3a13bd90285f5ed8e~mv2.png/v1/crop/x_29,y_0,w_964,h_1364/fill/w_239,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/qqqqqe_edited.png')"><div class="feature-card-overlay"><span class="feature-icon">🏆</span><p class="feature-title">최대 규모 시설</p><p class="feature-desc">선릉역 최대 규모 하이퍼블릭. 최신 인테리어와 고급 음향 시설.</p></div></div>
+      <div class="feature-card feature-card-img" style="background-image:url('https://static.wixstatic.com/media/ee8a66_5504c9a2e5784e9e8a3353261ca11216~mv2.jpg/v1/crop/x_0,y_32,w_736,h_1041/fill/w_239,h_338,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/vip_edited.jpg')"><div class="feature-card-overlay"><span class="feature-icon">👑</span><p class="feature-title">VIP 전담 서비스</p><p class="feature-desc">평균 출근 매니저 200명 이상이 최상의 서비스를 제공합니다.</p></div></div>
+      <div class="feature-card feature-card-img" style="background-image:url('https://static.wixstatic.com/media/ee8a66_e7d0e9312edd4ff59219e712be5d655d~mv2.png/v1/crop/x_0,y_260,w_887,h_1254/fill/w_239,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/124124124.png')"><div class="feature-card-overlay"><span class="feature-icon">⏰</span><p class="feature-title">연중무휴 24시간</p><p class="feature-desc">365일 공휴일 포함 언제든 방문 가능합니다.</p></div></div>
+      <div class="feature-card feature-card-img" style="background-image:url('https://static.wixstatic.com/media/ee8a66_a0cdd84c3f6747f0bc4997d61b15302e~mv2.png/v1/crop/x_0,y_209,w_1152,h_1629/fill/w_239,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%EC%9D%B4%EB%AF%B8%EC%A7%80.png')"><div class="feature-card-overlay"><span class="feature-icon">🎵</span><p class="feature-title">프리미엄 음향</p><p class="feature-desc">최고급 음향 시설과 노래방 시스템.</p></div></div>
+      <div class="feature-card"><span class="feature-icon">🚇</span><p class="feature-title">선릉역 도보 5분</p><p class="feature-desc">2호선 선릉역 1번 출구에서 도보 5분. 무료 발렛파킹 서비스 제공.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="quick-links">
+  <span class="section-label">QUICK MENU</span>
+  <h2 class="section-title">바로가기</h2>
+  <div class="section-divider"></div>
+  <div class="quick-grid">
+    <a href="price.html" class="quick-card"><span class="quick-icon">💰</span><span class="quick-name">가격안내</span><span class="quick-desc">1부 ₩100,000부터<br>강남 최저가</span><span class="quick-arrow">VIEW →</span></a>
+    <a href="hours.html" class="quick-card"><span class="quick-icon">⏰</span><span class="quick-name">영업시간</span><span class="quick-desc">365일 연중무휴<br>24시간 운영</span><span class="quick-arrow">VIEW →</span></a>
+    <a href="blog.html" class="quick-card"><span class="quick-icon">📖</span><span class="quick-name">블로그</span><span class="quick-desc">하이퍼블릭 가이드<br>선릉역 접대 정보</span><span class="quick-arrow">VIEW →</span></a>
+    <a href="location.html" class="quick-card"><span class="quick-icon">📍</span><span class="quick-name">오시는 길</span><span class="quick-desc">선릉역 1번 출구<br>도보 5분</span><span class="quick-arrow">VIEW →</span></a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">ELITE</span>
+  <a href="tel:010-8145-1911" class="footer-tel">010-8145-1911</a>
+  <p class="footer-info">선릉역 하이퍼블릭 엘리트 · 서울특별시 강남구 대치동 890-38 B1<br>© 2025 ELITE GANGNAM HIGHPUBLIC. All rights reserved.</p>
+</footer>
+
+<div class="float-cta">
+  <a href="tel:010-8145-1911" class="float-btn float-btn-tel">📞</a>
+  <a href="https://open.kakao.com/o/sGiPpFxi" class="float-btn float-btn-kakao" target="_blank">💬</a>
+</div>
+<script>
+function toggleDrawer(btn) {
+  btn.classList.toggle('open');
+  document.getElementById('navDrawer').classList.toggle('open');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가격안내 | 선릉역 하이퍼블릭 엘리트</title>
+<meta name="description" content="선릉역 하이퍼블릭 엘리트 가격안내. 1부 주대 100,000원, 2부 주대 110,000원. 강남 최저가.">
+<meta name="keywords" content="강남 하이퍼블릭 가격, 선릉역 엘리트 주대, 하이퍼블릭 주대 가격, 강남 최저가">
+<link rel="canonical" href="https://seolleung-elite.com/price.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(201,169,110,0.15);
+    margin-bottom: 2rem;
+  }
+  .price-card { background: var(--dark2); padding: 3rem 2rem; text-align: center; }
+  .price-card-name { font-size: 0.78rem; letter-spacing: 0.2em; color: var(--text-muted); margin-bottom: 1.2rem; display: block; }
+  .price-amount { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold); font-weight: 600; }
+  .price-unit { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.5rem; }
+  .price-note {
+    background: rgba(201,169,110,0.05);
+    border-left: 2px solid var(--gold);
+    padding: 1.2rem 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 2;
+    margin-bottom: 4rem;
+  }
+  .estimate-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .estimate-table th {
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+    text-align: center;
+    background: rgba(201,169,110,0.05);
+  }
+  .estimate-table td {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .estimate-table td:first-child {
+    color: var(--white);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .estimate-table tr:hover td {
+    background: rgba(201,169,110,0.04);
+    color: var(--text);
+  }
+  .composition-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(201,169,110,0.15);
+    margin-top: 2rem;
+  }
+  .comp-item {
+    background: var(--dark2);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.8rem 2rem;
+  }
+  .comp-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: 600;
+    line-height: 1;
+    min-width: 2rem;
+  }
+  .comp-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ELITE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="price.html" class="active">가격안내</a></li>
+    <li><a href="hours.html">영업시간</a></li>
+    <li><a href="blog.html">블로그</a></li>
+    <li><a href="location.html">오시는 길</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:010-8145-1911" class="nav-tel">📞 예약문의</a>
+    <button class="nav-hamburger" onclick="toggleDrawer(this)" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html">홈</a>
+  <a href="price.html" class="active">가격안내</a>
+  <a href="hours.html">영업시간</a>
+  <a href="blog.html">블로그</a>
+  <a href="location.html">오시는 길</a>
+  <a href="tel:010-8145-1911" class="drawer-tel">📞 010-8145-1911</a>
+</div>
+
+<div class="page-header">
+  <span class="section-label">PRICE GUIDE</span>
+  <h1>가격 안내</h1>
+  <p>강남 최저가로 투명하게 운영됩니다.<br>추가 비용 없이 안심하고 이용하세요.</p>
+</div>
+
+<div class="page-content">
+
+  <!-- 기본 주대 -->
+  <span class="section-label">주대</span>
+  <h2 class="section-title">기본 주대</h2>
+  <div class="section-divider"></div>
+  <div class="price-grid">
+    <div class="price-card">
+      <span class="price-card-name">1부 주대</span>
+      <span class="price-amount">₩100,000</span>
+      <span class="price-unit">17:00 ~ 01:00</span>
+    </div>
+    <div class="price-card">
+      <span class="price-card-name">2부 주대</span>
+      <span class="price-amount">₩110,000</span>
+      <span class="price-unit">01:00 ~ 15:00</span>
+    </div>
+  </div>
+  <div class="price-note">
+    * 강남 최저가 운영입니다. 타 가게와 비교해보세요!<br>
+    * 초저녁 할인 이벤트 및 게릴라 주대 이벤트 활용 시 더욱 저렴하게 이용 가능합니다.<br>
+    * 기타 비용 및 자세한 안내는 문의 주세요.
+  </div>
+
+  <!-- 기본 구성 -->
+  <span class="section-label">구성</span>
+  <h2 class="section-title">테이블 기본 구성</h2>
+  <div class="section-divider"></div>
+  <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;">위스키 세트를 주문하시면 아래 5가지 서비스가 기본 제공됩니다.</p>
+  <div class="composition-list">
+    <div class="comp-item"><span class="comp-num">1</span><span class="comp-text">주문하신 위스키 (양주)</span></div>
+    <div class="comp-item"><span class="comp-num">2</span><span class="comp-text">진안주 모듬과일</span></div>
+    <div class="comp-item"><span class="comp-num">3</span><span class="comp-text">소주 · 맥주</span></div>
+    <div class="comp-item"><span class="comp-num">4</span><span class="comp-text">최신 인테리어 룸</span></div>
+    <div class="comp-item"><span class="comp-num">5</span><span class="comp-text">고급 음향 시설 (노래방 · 플레이어)</span></div>
+  </div>
+
+  <!-- 문의 유도 -->
+  <div style="margin-top:4rem;text-align:center;padding:3rem;border:1px solid rgba(201,169,110,0.15);">
+    <span class="section-label" style="display:block;text-align:center;">CONTACT</span>
+    <p style="font-family:'Noto Serif KR',serif;font-size:1.2rem;color:var(--white);margin-bottom:0.8rem;">더 자세한 내용이 궁금하신가요?</p>
+    <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:2rem;">전화 또는 카카오톡으로 편하게 문의해 주세요.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="tel:010-8145-1911" style="background:var(--gold);color:var(--black);padding:0.9rem 2.5rem;text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;font-weight:500;">📞 전화 문의</a>
+      <a href="https://open.kakao.com/o/sGiPpFxi" target="_blank" style="background:#FEE500;color:#191919;padding:0.9rem 2.5rem;text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;font-weight:500;">💬 카카오 문의</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-logo">ELITE</span>
+  <a href="tel:010-8145-1911" class="footer-tel">010-8145-1911</a>
+  <p class="footer-info">선릉역 하이퍼블릭 엘리트 · 서울특별시 강남구 대치동 890-38 B1<br>© 2025 ELITE GANGNAM HIGHPUBLIC. All rights reserved.</p>
+</footer>
+<div class="float-cta">
+  <a href="tel:010-8145-1911" class="float-btn float-btn-tel">📞</a>
+  <a href="https://open.kakao.com/o/sGiPpFxi" class="float-btn float-btn-kakao" target="_blank">💬</a>
+</div>
+<script>
+function toggleDrawer(btn) {
+  btn.classList.toggle('open');
+  document.getElementById('navDrawer').classList.toggle('open');
+}
+</script>
+</body>
+</html>
