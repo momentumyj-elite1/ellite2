@@ -1,0 +1,270 @@
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e8d5a8;
+  --gold-dark: #9a7a42;
+  --black: #0a0a0a;
+  --dark: #111111;
+  --dark2: #1a1a1a;
+  --dark3: #222222;
+  --text: #e8e4dc;
+  --text-muted: #9a9590;
+  --white: #f5f0e8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(201,169,110,0.12);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  transition: color 0.3s;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid transparent;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.nav-tel {
+  font-size: 0.82rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--gold-dark);
+  padding: 0.4rem 1rem;
+  transition: all 0.3s;
+}
+.nav-tel:hover { background: var(--gold); color: var(--black); }
+
+/* 햄버거 버튼 */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+  transition: all 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* 모바일 드로어 */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 57px; left: 0; right: 0;
+  background: rgba(10,10,10,0.98);
+  border-bottom: 1px solid rgba(201,169,110,0.12);
+  padding: 1.5rem 2rem;
+  z-index: 99;
+  flex-direction: column;
+  gap: 0;
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(201,169,110,0.08);
+  transition: color 0.3s;
+}
+.nav-drawer a:hover,
+.nav-drawer a.active { color: var(--gold); }
+.nav-drawer .drawer-tel {
+  color: var(--gold);
+  margin-top: 1rem;
+  border-bottom: none;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  padding: 9rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: var(--gold);
+}
+.page-header .section-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+.page-header h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+.page-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 2;
+}
+
+/* ── SECTIONS ── */
+.page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+.section-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.section-divider {
+  width: 40px; height: 1px;
+  background: var(--gold);
+  margin-bottom: 2.5rem;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(201,169,110,0.15);
+  padding: 4rem 2rem;
+  text-align: center;
+  background: var(--dark);
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+.footer-info {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 2.2;
+  letter-spacing: 0.05em;
+}
+.footer-tel {
+  font-size: 1.3rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* ── FLOATING CTA ── */
+.float-cta {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.float-btn {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.3rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.float-btn-tel { background: var(--gold); color: var(--black); }
+.float-btn-kakao { background: #FEE500; color: #191919; }
+.float-btn:hover { transform: scale(1.1); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.2rem; }
+  .nav-links { display: none; }
+  .nav-tel { display: none; }
+  .nav-hamburger { display: flex; }
+  .page-content { padding: 3rem 1.2rem; }
+  .page-header { padding: 7rem 1.2rem 4rem; }
+}
