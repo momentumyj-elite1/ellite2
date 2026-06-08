@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이용 가이드 | 강남 하이퍼블릭 완벽 안내</title>
+<meta name="description" content="강남 하이퍼블릭 이용 가이드. 처음 방문하시는 분을 위한 예약 방법, 1부 2부 차이, 픽업 서비스, 가격 구조까지 완벽 정리.">
+<meta name="keywords" content="강남 하이퍼블릭 이용방법, 하이퍼블릭 예약, 강남 하이퍼블릭 처음, 선릉역 하이퍼블릭 가이드">
+<link rel="canonical" href="https://ellite.co.kr/guide.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .guide-list { display:flex; flex-direction:column; gap:1px; background:rgba(201,169,110,0.15); margin-top:2.5rem; }
+  .guide-item { background:var(--dark2); padding:2.5rem; display:grid; grid-template-columns:80px 1fr; gap:2rem; align-items:start; }
+  .guide-num { font-family:'Cormorant Garamond',serif; font-size:3rem; color:rgba(201,169,110,0.2); font-weight:600; line-height:1; }
+  .guide-content h3 { font-family:'Noto Serif KR',serif; font-size:1.1rem; font-weight:600; color:var(--white); margin-bottom:0.8rem; }
+  .guide-content p { font-size:0.85rem; color:var(--text-muted); line-height:2.1; }
+  .guide-content ul { padding-left:1.2rem; margin-top:0.8rem; }
+  .guide-content ul li { font-size:0.82rem; color:var(--text-muted); line-height:2; }
+  .faq-list { display:flex; flex-direction:column; gap:1px; background:rgba(201,169,110,0.15); margin-top:2.5rem; }
+  .faq-item { background:var(--dark2); padding:2rem 2.5rem; }
+  .faq-q { font-size:0.88rem; font-weight:500; color:var(--gold); margin-bottom:0.8rem; }
+  .faq-a { font-size:0.82rem; color:var(--text-muted); line-height:2; }
+  .cta-box { border:1px solid rgba(201,169,110,0.2); padding:3rem 2rem; text-align:center; margin-top:4rem; }
+  .cta-title { font-family:'Noto Serif KR',serif; font-size:1.4rem; font-weight:600; color:var(--white); margin-bottom:0.8rem; }
+  .cta-desc { font-size:0.85rem; color:var(--text-muted); margin-bottom:2rem; line-height:2; }
+  .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .btn-gold { background:var(--gold); color:var(--black); padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; font-weight:500; }
+  .btn-outline { border:1px solid var(--gold); color:var(--gold); padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; }
+  @media (max-width:768px) { .guide-item { grid-template-columns:1fr; gap:0.5rem; } .guide-num { font-size:2rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">GUIDE</a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="guide.html" class="active">이용가이드</a></li>
+    <li><a href="price.html">가격안내</a></li>
+    <li><a href="blog.html">블로그</a></li>
+    <li><a href="location.html">오시는 길</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:010-8145-1911" class="nav-tel">📞 무료 상담</a>
+    <button class="nav-hamburger" onclick="toggleDrawer(this)"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html">홈</a>
+  <a href="guide.html" class="active">이용가이드</a>
+  <a href="price.html">가격안내</a>
+  <a href="blog.html">블로그</a>
+  <a href="location.html">오시는 길</a>
+  <a href="tel:010-8145-1911" class="drawer-tel">📞 010-8145-1911</a>
+</div>
+
+<div class="page-header">
+  <span class="section-label">GUIDE</span>
+  <h1>이용 가이드</h1>
+  <p>처음 방문하시는 분도 걱정 없이.<br>예약부터 입장까지 전 과정을 안내해드립니다.</p>
+</div>
+
+<div class="page-content">
+  <span class="section-label">STEP BY STEP</span>
+  <h2 class="section-title">이용 순서</h2>
+  <div class="section-divider"></div>
+  <div class="guide-list">
+    <div class="guide-item">
+      <span class="guide-num">01</span>
+      <div class="guide-content">
+        <h3>상담 문의</h3>
+        <p>전화 또는 카카오톡으로 방문 인원, 희망 시간, 예산을 알려주세요. 24시간 연중무휴로 즉시 상담이 가능합니다.</p>
+        <ul><li>전화: 010-8145-1911</li><li>카카오톡 오픈채팅 문의 가능</li><li>24시간 연중무휴 상담</li></ul>
+      </div>
+    </div>
+    <div class="guide-item">
+      <span class="guide-num">02</span>
+      <div class="guide-content">
+        <h3>맞춤 안내</h3>
+        <p>인원 수, 예산, 목적에 맞는 최적의 자리와 가격을 안내해드립니다. 1부와 2부 중 원하시는 시간대를 선택하시면 됩니다.</p>
+        <ul><li>1부 (17:00~01:00) — 주대 ₩100,000~</li><li>2부 (01:00~15:00) — 주대 ₩110,000~</li><li>초저녁 할인 이벤트 안내</li></ul>
+      </div>
+    </div>
+    <div class="guide-item">
+      <span class="guide-num">03</span>
+      <div class="guide-content">
+        <h3>이동</h3>
+        <p>강남권 내에 계신 분들은 무료 픽업 서비스를 이용하실 수 있습니다. 직접 방문하시는 분들은 선릉역 1번 출구 도보 5분 거리입니다.</p>
+        <ul><li>강남권 무료 픽업 서비스 (사전 예약 필수)</li><li>자가용 — 무료 발렛파킹</li><li>지하철 — 선릉역 1번 출구 도보 5분</li></ul>
+      </div>
+    </div>
+    <div class="guide-item">
+      <span class="guide-num">04</span>
+      <div class="guide-content">
+        <h3>입장 및 이용</h3>
+        <p>입구에서 예약 여부를 말씀해 주시면 바로 안내해드립니다. 프라이빗한 룸에서 편안하게 즐기실 수 있습니다.</p>
+        <ul><li>독립된 프라이빗 룸 배정</li><li>평균 출근 매니저 200명 이상 상시 대기</li><li>최고급 음향 시설 · 노래방 시스템</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+  <span class="section-label">FAQ</span>
+  <h2 class="section-title">자주 묻는 질문</h2>
+  <div class="section-divider"></div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <p class="faq-q">Q. 예약이 꼭 필요한가요?</p>
+      <p class="faq-a">필수는 아니지만 미리 연락하시면 더 좋은 자리를 배정받으실 수 있습니다. 특히 주말이나 성수기에는 사전 예약을 권장합니다.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Q. 1부와 2부의 차이는 무엇인가요?</p>
+      <p class="faq-a">시간대와 주대 가격의 차이입니다. 1부(17:00~01:00)가 2부(01:00~15:00)보다 주대가 약간 저렴합니다. 서비스 수준은 동일합니다.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Q. 혼자도 방문 가능한가요?</p>
+      <p class="faq-a">물론 가능합니다. 1인부터 단체까지 모두 환영합니다. 인원에 맞는 최적의 자리를 안내해드립니다.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Q. 강남권 픽업 서비스는 어떻게 이용하나요?</p>
+      <p class="faq-a">방문 전 전화 또는 카카오톡으로 위치를 알려주시면 됩니다. 강남권 내 무료 픽업 서비스를 제공해드립니다. 사전 예약이 필요합니다.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Q. 영업시간은 어떻게 되나요?</p>
+      <p class="faq-a">365일 연중무휴 24시간 운영합니다. 공휴일에도 동일하게 운영됩니다.</p>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <p class="cta-title">더 궁금한 점이 있으신가요?</p>
+    <p class="cta-desc">편하게 문의해 주세요. 최적의 자리를 바로 안내해드립니다.</p>
+    <div class="cta-btns">
+      <a href="tel:010-8145-1911" class="btn-gold">📞 전화 상담</a>
+      <a href="https://open.kakao.com/o/sGiPpFxi" target="_blank" class="btn-outline">💬 카카오 상담</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">GUIDE</span>
+  <a href="tel:010-8145-1911" class="footer-tel">010-8145-1911</a>
+  <p class="footer-info">강남 하이퍼블릭 전문 안내 · 선릉역 · 대치동 · 역삼동<br>© 2025 GANGNAM HIGHPUBLIC GUIDE. All rights reserved.</p>
+</footer>
+<div class="float-cta">
+  <a href="tel:010-8145-1911" class="float-btn float-btn-tel">📞</a>
+  <a href="https://open.kakao.com/o/sGiPpFxi" class="float-btn float-btn-kakao" target="_blank">💬</a>
+</div>
+<script>
+function toggleDrawer(btn) {
+  btn.classList.toggle('open');
+  document.getElementById('navDrawer').classList.toggle('open');
+}
+</script>
+</body>
+</html>
