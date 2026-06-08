@@ -24,11 +24,13 @@
    히어로 배경, 갤러리 인물/룸 이미지 순서대로 넣으세요.
 */
 :root {
-  --img-hero: url('https://static.wixstatic.com/media/ee8a66_5239b728d7e94a82b125d1073c6a2b49~mv2.png/v1/fill/w_979,h_504,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/ellite.png');
-  --img-1: url('https://static.wixstatic.com/media/ee8a66_ffb64eb23a1c44d3a13bd90285f5ed8e~mv2.png/v1/crop/x_29,y_0,w_964,h_1364/fill/w_400,h_560,al_c,q_85,enc_avif,quality_auto/qqqqqe_edited.png');
-  --img-2: url('https://static.wixstatic.com/media/ee8a66_5504c9a2e5784e9e8a3353261ca11216~mv2.jpg/v1/crop/x_0,y_32,w_736,h_1041/fill/w_400,h_560,al_c,q_80,enc_avif,quality_auto/vip_edited.jpg');
-  --img-3: url('https://static.wixstatic.com/media/ee8a66_a0cdd84c3f6747f0bc4997d61b15302e~mv2.png/v1/crop/x_0,y_209,w_1152,h_1629/fill/w_400,h_560,al_c,q_85,enc_avif,quality_auto/%EC%9D%B4%EB%AF%B8%EC%A7%80.png');
-  --img-4: url('https://static.wixstatic.com/media/ee8a66_e7d0e9312edd4ff59219e712be5d655d~mv2.png/v1/crop/x_0,y_260,w_887,h_1254/fill/w_400,h_560,al_c,q_85,enc_avif,quality_auto/124124124.png');
+  --img-hero: url('https://raw.githubusercontent.com/momentumyj-elite1/ellite2/main/girl4.jpg');
+  --img-1: url('https://raw.githubusercontent.com/momentumyj-elite1/ellite2/main/girl1.jpg');
+  --img-2: url('https://raw.githubusercontent.com/momentumyj-elite1/ellite2/main/girl2.jpg');
+  --img-3: url('https://raw.githubusercontent.com/momentumyj-elite1/ellite2/main/girl3.jpg');
+  --img-4: url('https://raw.githubusercontent.com/momentumyj-elite1/ellite2/main/room1.jpg');
+  --img-5: url('https://raw.githubusercontent.com/momentumyj-elite1/ellite2/main/room2.jpg');
+  --img-6: url('https://raw.githubusercontent.com/momentumyj-elite1/ellite2/main/room3.jpg');
 }
 
 /* HERO */
@@ -40,8 +42,8 @@
 .hero-bg {
   position:absolute; inset:0;
   background-image:var(--img-hero);
-  background-size:cover; background-position:center;
-  filter:brightness(0.25);
+  background-size:cover; background-position:center 20%;
+  filter:brightness(0.4);
   animation:kenburns 20s ease-in-out infinite alternate;
 }
 @keyframes kenburns {
@@ -152,6 +154,8 @@
 .g2 { background-image:var(--img-2); }
 .g3 { background-image:var(--img-3); }
 .g4 { background-image:var(--img-4); }
+.g5 { background-image:var(--img-5); }
+.g6 { background-image:var(--img-6); }
 
 /* GUIDE CARDS */
 .guide-wrap { background:#15171c; }
@@ -294,13 +298,17 @@
   <div class="gallery-track-wrap">
     <div class="gallery-track">
       <div class="gallery-item g1"></div>
-      <div class="gallery-item g2"></div>
-      <div class="gallery-item g3"></div>
       <div class="gallery-item g4"></div>
+      <div class="gallery-item g2"></div>
+      <div class="gallery-item g5"></div>
+      <div class="gallery-item g3"></div>
+      <div class="gallery-item g6"></div>
       <div class="gallery-item g1"></div>
-      <div class="gallery-item g2"></div>
-      <div class="gallery-item g3"></div>
       <div class="gallery-item g4"></div>
+      <div class="gallery-item g2"></div>
+      <div class="gallery-item g5"></div>
+      <div class="gallery-item g3"></div>
+      <div class="gallery-item g6"></div>
     </div>
   </div>
 </div>
