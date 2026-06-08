@@ -1,7 +1,7 @@
 :root {
-  --gold: #c9a96e;
-  --gold-light: #e8d5a8;
-  --gold-dark: #9a7a42;
+  --gold: #6ba3d6;
+  --gold-light: #a8d0ed;
+  --gold-dark: #4a7ba3;
   --black: #0a0a0a;
   --dark: #111111;
   --dark2: #1a1a1a;
@@ -33,7 +33,7 @@ nav {
   align-items: center;
   background: rgba(10,10,10,0.97);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(201,169,110,0.12);
+  border-bottom: 1px solid rgba(107,163,214,0.12);
 }
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
@@ -104,7 +104,7 @@ nav {
   position: fixed;
   top: 57px; left: 0; right: 0;
   background: rgba(10,10,10,0.98);
-  border-bottom: 1px solid rgba(201,169,110,0.12);
+  border-bottom: 1px solid rgba(107,163,214,0.12);
   padding: 1.5rem 2rem;
   z-index: 99;
   flex-direction: column;
@@ -117,7 +117,7 @@ nav {
   font-size: 0.85rem;
   letter-spacing: 0.15em;
   padding: 0.9rem 0;
-  border-bottom: 1px solid rgba(201,169,110,0.08);
+  border-bottom: 1px solid rgba(107,163,214,0.08);
   transition: color 0.3s;
 }
 .nav-drawer a:hover,
@@ -142,7 +142,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(107,163,214,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .page-header::after {
@@ -207,7 +207,7 @@ nav {
 
 /* ── FOOTER ── */
 footer {
-  border-top: 1px solid rgba(201,169,110,0.15);
+  border-top: 1px solid rgba(107,163,214,0.15);
   padding: 4rem 2rem;
   text-align: center;
   background: var(--dark);
