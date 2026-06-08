@@ -19,6 +19,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
+/* ===== 이미지 교체 영역 =====
+   아래 --img-* 변수의 URL만 바꾸면 사이트 전체 이미지가 교체됩니다.
+   히어로 배경, 갤러리 인물/룸 이미지 순서대로 넣으세요.
+*/
+:root {
+  --img-hero: url('https://static.wixstatic.com/media/ee8a66_5239b728d7e94a82b125d1073c6a2b49~mv2.png/v1/fill/w_979,h_504,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/ellite.png');
+  --img-1: url('https://static.wixstatic.com/media/ee8a66_ffb64eb23a1c44d3a13bd90285f5ed8e~mv2.png/v1/crop/x_29,y_0,w_964,h_1364/fill/w_400,h_560,al_c,q_85,enc_avif,quality_auto/qqqqqe_edited.png');
+  --img-2: url('https://static.wixstatic.com/media/ee8a66_5504c9a2e5784e9e8a3353261ca11216~mv2.jpg/v1/crop/x_0,y_32,w_736,h_1041/fill/w_400,h_560,al_c,q_80,enc_avif,quality_auto/vip_edited.jpg');
+  --img-3: url('https://static.wixstatic.com/media/ee8a66_a0cdd84c3f6747f0bc4997d61b15302e~mv2.png/v1/crop/x_0,y_209,w_1152,h_1629/fill/w_400,h_560,al_c,q_85,enc_avif,quality_auto/%EC%9D%B4%EB%AF%B8%EC%A7%80.png');
+  --img-4: url('https://static.wixstatic.com/media/ee8a66_e7d0e9312edd4ff59219e712be5d655d~mv2.png/v1/crop/x_0,y_260,w_887,h_1254/fill/w_400,h_560,al_c,q_85,enc_avif,quality_auto/124124124.png');
+}
+
+/* HERO */
 .hero {
   min-height:100vh; display:flex; flex-direction:column;
   align-items:center; justify-content:center;
@@ -26,101 +39,169 @@
 }
 .hero-bg {
   position:absolute; inset:0;
-  background-image:url('https://static.wixstatic.com/media/ee8a66_5239b728d7e94a82b125d1073c6a2b49~mv2.png/v1/fill/w_979,h_504,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/ellite.png');
-  background-size:cover; background-position:center; filter:brightness(0.18);
+  background-image:var(--img-hero);
+  background-size:cover; background-position:center;
+  filter:brightness(0.25);
+  animation:kenburns 20s ease-in-out infinite alternate;
 }
-.hero-bg::after {
-  content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 40%, rgba(107,163,214,0.12) 0%, transparent 70%);
+@keyframes kenburns {
+  0% { transform:scale(1) translate(0,0); }
+  100% { transform:scale(1.12) translate(-2%,-2%); }
 }
-.hero-content { position:relative; z-index:2; padding:2rem; }
+.hero-overlay {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(107,163,214,0.18) 0%, transparent 70%),
+    linear-gradient(to bottom, rgba(10,10,12,0.4), rgba(10,10,12,0.85));
+}
+/* 떠다니는 빛 입자 */
+.particles { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.particle {
+  position:absolute; bottom:-10px;
+  width:3px; height:3px; border-radius:50%;
+  background:rgba(168,208,237,0.6);
+  box-shadow:0 0 8px rgba(107,163,214,0.8);
+  animation:float-up linear infinite;
+}
+@keyframes float-up {
+  0% { transform:translateY(0) translateX(0); opacity:0; }
+  10% { opacity:1; }
+  90% { opacity:1; }
+  100% { transform:translateY(-100vh) translateX(40px); opacity:0; }
+}
+.hero-content { position:relative; z-index:3; padding:2rem; }
 .hero-badge {
-  display:inline-block; background:rgba(107,163,214,0.15);
-  border:1px solid rgba(107,163,214,0.3); color:var(--gold);
-  font-size:0.72rem; letter-spacing:0.3em; padding:0.4rem 1.2rem;
+  display:inline-block; background:rgba(107,163,214,0.12);
+  border:1px solid rgba(107,163,214,0.35); color:#a8d0ed;
+  font-size:0.72rem; letter-spacing:0.25em; padding:0.4rem 1.2rem;
   margin-bottom:2rem; opacity:0; animation:fadeUp 1s ease 0.2s forwards;
+  backdrop-filter:blur(6px);
 }
 .hero-sub {
   font-family:'Cormorant Garamond',serif; font-size:0.9rem;
-  letter-spacing:0.5em; color:var(--gold); margin-bottom:1rem;
+  letter-spacing:0.5em; color:#6ba3d6; margin-bottom:1rem;
   opacity:0; animation:fadeUp 1s ease 0.4s forwards;
 }
 .hero-title {
   font-family:'Noto Serif KR',serif;
   font-size:clamp(2rem,6vw,4rem); font-weight:700;
-  color:var(--white); line-height:1.3; letter-spacing:0.02em;
+  color:#f5f7fa; line-height:1.3;
   margin-bottom:1rem; opacity:0; animation:fadeUp 1s ease 0.6s forwards;
+  text-shadow:0 2px 30px rgba(0,0,0,0.5);
 }
-.hero-title em { font-style:normal; color:var(--gold); }
+.hero-title em { font-style:normal; color:#6ba3d6; }
 .hero-title-sub {
   font-size:clamp(0.85rem,2vw,1.1rem);
-  letter-spacing:0.2em; color:var(--text-muted); margin-bottom:2.5rem;
+  letter-spacing:0.2em; color:#9aa5b1; margin-bottom:2.5rem;
   opacity:0; animation:fadeUp 1s ease 0.8s forwards;
 }
-.hero-divider { width:60px; height:1px; background:var(--gold); margin:0 auto 2rem; opacity:0; animation:fadeUp 1s ease 1s forwards; }
-.hero-desc { font-size:0.88rem; color:var(--text-muted); max-width:520px; line-height:2.2; margin-bottom:2.5rem; opacity:0; animation:fadeUp 1s ease 1.2s forwards; }
+.hero-divider {
+  width:60px; height:1px; background:#6ba3d6; margin:0 auto 2rem;
+  opacity:0; animation:expandWidth 1s ease 1s forwards;
+}
+@keyframes expandWidth { from { width:0; opacity:0; } to { width:60px; opacity:1; } }
+.hero-desc { font-size:0.88rem; color:#9aa5b1; max-width:520px; line-height:2.2; margin-bottom:2.5rem; opacity:0; animation:fadeUp 1s ease 1.2s forwards; }
 .hero-cta { display:inline-flex; gap:1rem; opacity:0; animation:fadeUp 1s ease 1.4s forwards; flex-wrap:wrap; justify-content:center; }
-.btn-gold { background:var(--gold); color:var(--black); padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; font-weight:500; transition:all 0.3s; }
-.btn-gold:hover { background:var(--gold-light); }
-.btn-outline { border:1px solid var(--gold); color:var(--gold); padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; transition:all 0.3s; }
-.btn-outline:hover { background:rgba(107,163,214,0.1); }
+.btn-gold { background:#6ba3d6; color:#0a0a0c; padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; font-weight:500; transition:all 0.3s; box-shadow:0 4px 20px rgba(107,163,214,0.3); }
+.btn-gold:hover { background:#a8d0ed; transform:translateY(-2px); box-shadow:0 8px 30px rgba(107,163,214,0.5); }
+.btn-outline { border:1px solid #6ba3d6; color:#6ba3d6; padding:0.9rem 2.5rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.2em; transition:all 0.3s; }
+.btn-outline:hover { background:rgba(107,163,214,0.1); transform:translateY(-2px); }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+/* 스크롤 인디케이터 */
+.scroll-hint {
+  position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+  z-index:3; color:#6ba3d6; font-size:0.7rem; letter-spacing:0.2em;
+  opacity:0; animation:fadeUp 1s ease 1.8s forwards;
+  display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+}
+.scroll-hint .arrow { width:1px; height:30px; background:linear-gradient(to bottom, #6ba3d6, transparent); animation:scrollPulse 2s ease infinite; }
+@keyframes scrollPulse { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
+
+/* 스크롤 등장 애니메이션 */
+.reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
 
 /* ABOUT */
 .about-section { max-width:1100px; margin:0 auto; padding:6rem 2rem; }
 .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
-.about-text p { color:var(--text-muted); font-size:0.9rem; line-height:2.2; margin-bottom:1.5rem; }
+.about-text p { color:#9aa5b1; font-size:0.9rem; line-height:2.2; margin-bottom:1.5rem; }
 .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(107,163,214,0.15); }
-.stat-box { background:var(--dark2); padding:2.5rem; text-align:center; }
-.stat-num { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; color:var(--gold); line-height:1; display:block; }
-.stat-label { font-size:0.75rem; letter-spacing:0.12em; color:var(--text-muted); margin-top:0.5rem; display:block; }
+.stat-box { background:#15171c; padding:2.5rem; text-align:center; transition:background 0.3s; }
+.stat-box:hover { background:#1c1f26; }
+.stat-num { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; color:#6ba3d6; line-height:1; display:block; }
+.stat-label { font-size:0.75rem; letter-spacing:0.12em; color:#9aa5b1; margin-top:0.5rem; display:block; }
 
-/* GUIDE */
-.guide-wrap { background:var(--dark2); }
+/* GALLERY (자동 슬라이드) */
+.gallery-wrap { background:#0d0f13; padding:6rem 0; overflow:hidden; }
+.gallery-head { max-width:1100px; margin:0 auto 3rem; padding:0 2rem; }
+.gallery-track-wrap { width:100%; overflow:hidden; mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+.gallery-track { display:flex; gap:1rem; width:max-content; animation:slide 40s linear infinite; }
+.gallery-track:hover { animation-play-state:paused; }
+@keyframes slide { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+.gallery-item {
+  width:260px; height:360px; flex-shrink:0;
+  background-size:cover; background-position:center;
+  border:1px solid rgba(107,163,214,0.15);
+  position:relative; overflow:hidden;
+  transition:transform 0.4s;
+}
+.gallery-item::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(13,15,19,0.7), transparent 50%); }
+.gallery-item:hover { transform:scale(1.04); }
+.g1 { background-image:var(--img-1); }
+.g2 { background-image:var(--img-2); }
+.g3 { background-image:var(--img-3); }
+.g4 { background-image:var(--img-4); }
+
+/* GUIDE CARDS */
+.guide-wrap { background:#15171c; }
 .guide-inner { max-width:1100px; margin:0 auto; padding:6rem 2rem; }
 .guide-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
-.guide-card { border:1px solid rgba(107,163,214,0.15); padding:2.5rem 2rem; transition:border-color 0.3s; }
-.guide-card:hover { border-color:rgba(107,163,214,0.4); }
+.guide-card { border:1px solid rgba(107,163,214,0.15); padding:2.5rem 2rem; transition:all 0.3s; background:rgba(107,163,214,0.02); }
+.guide-card:hover { border-color:rgba(107,163,214,0.4); transform:translateY(-4px); background:rgba(107,163,214,0.05); }
 .guide-icon { font-size:1.5rem; margin-bottom:1.2rem; display:block; }
-.guide-title { font-family:'Noto Serif KR',serif; font-size:1.05rem; font-weight:600; color:var(--white); margin-bottom:0.8rem; }
-.guide-desc { font-size:0.82rem; color:var(--text-muted); line-height:2; }
+.guide-title { font-family:'Noto Serif KR',serif; font-size:1.05rem; font-weight:600; color:#f5f7fa; margin-bottom:0.8rem; }
+.guide-desc { font-size:0.82rem; color:#9aa5b1; line-height:2; }
 
 /* PRICE */
 .price-section { max-width:1100px; margin:0 auto; padding:6rem 2rem; }
 .price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(107,163,214,0.15); margin-top:2.5rem; }
-.price-card { background:var(--dark2); padding:2.5rem 2rem; text-align:center; }
-.price-name { font-size:0.75rem; letter-spacing:0.2em; color:var(--text-muted); display:block; margin-bottom:1rem; }
-.price-amount { font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:var(--gold); font-weight:600; }
-.price-unit { font-size:0.72rem; color:var(--text-muted); display:block; margin-top:0.4rem; }
-.price-note { background:rgba(107,163,214,0.05); border-left:2px solid var(--gold); padding:1rem 1.5rem; font-size:0.82rem; color:var(--text-muted); line-height:2; margin-top:1.5rem; }
+.price-card { background:#15171c; padding:2.5rem 2rem; text-align:center; transition:background 0.3s; }
+.price-card:hover { background:#1c1f26; }
+.price-name { font-size:0.75rem; letter-spacing:0.2em; color:#9aa5b1; display:block; margin-bottom:1rem; }
+.price-amount { font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:#6ba3d6; font-weight:600; }
+.price-unit { font-size:0.72rem; color:#9aa5b1; display:block; margin-top:0.4rem; }
+.price-note { background:rgba(107,163,214,0.05); border-left:2px solid #6ba3d6; padding:1rem 1.5rem; font-size:0.82rem; color:#9aa5b1; line-height:2; margin-top:1.5rem; }
 
 /* PROCESS */
-.process-wrap { background:var(--dark2); }
+.process-wrap { background:#15171c; }
 .process-inner { max-width:1100px; margin:0 auto; padding:6rem 2rem; }
 .process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(107,163,214,0.15); margin-top:3rem; }
-.process-card { background:var(--dark); padding:2.5rem 1.5rem; text-align:center; }
+.process-card { background:#0d0f13; padding:2.5rem 1.5rem; text-align:center; transition:background 0.3s; }
+.process-card:hover { background:#15171c; }
 .process-num { font-family:'Cormorant Garamond',serif; font-size:2.5rem; color:rgba(107,163,214,0.25); font-weight:600; line-height:1; display:block; margin-bottom:0.5rem; }
 .process-icon { font-size:1.5rem; display:block; margin-bottom:1rem; }
-.process-title { font-family:'Noto Serif KR',serif; font-size:0.95rem; font-weight:600; color:var(--white); margin-bottom:0.6rem; }
-.process-desc { font-size:0.75rem; color:var(--text-muted); line-height:1.9; }
+.process-title { font-family:'Noto Serif KR',serif; font-size:0.95rem; font-weight:600; color:#f5f7fa; margin-bottom:0.6rem; }
+.process-desc { font-size:0.75rem; color:#9aa5b1; line-height:1.9; }
 
 /* CTA */
 .cta-section { max-width:1100px; margin:0 auto; padding:6rem 2rem; text-align:center; }
 .cta-box { border:1px solid rgba(107,163,214,0.2); padding:4rem 2rem; position:relative; overflow:hidden; }
-.cta-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(107,163,214,0.05) 0%, transparent 70%); }
-.cta-title { font-family:'Noto Serif KR',serif; font-size:clamp(1.4rem,3vw,2rem); font-weight:600; color:var(--white); margin-bottom:1rem; position:relative; z-index:2; }
-.cta-desc { font-size:0.85rem; color:var(--text-muted); line-height:2; margin-bottom:2.5rem; position:relative; z-index:2; }
+.cta-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 50% 50%, rgba(107,163,214,0.08) 0%, transparent 70%); animation:glowPulse 4s ease infinite; }
+@keyframes glowPulse { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+.cta-title { font-family:'Noto Serif KR',serif; font-size:clamp(1.4rem,3vw,2rem); font-weight:600; color:#f5f7fa; margin-bottom:1rem; position:relative; z-index:2; }
+.cta-desc { font-size:0.85rem; color:#9aa5b1; line-height:2; margin-bottom:2.5rem; position:relative; z-index:2; }
 .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; position:relative; z-index:2; }
 
 /* QUICK */
 .quick-links { max-width:1100px; margin:0 auto; padding:5rem 2rem; }
 .quick-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(107,163,214,0.15); margin-top:3rem; }
-.quick-card { background:var(--dark); padding:2.5rem 2rem; text-decoration:none; text-align:center; transition:background 0.3s; display:block; }
-.quick-card:hover { background:var(--dark2); }
+.quick-card { background:#0d0f13; padding:2.5rem 2rem; text-decoration:none; text-align:center; transition:all 0.3s; display:block; }
+.quick-card:hover { background:#15171c; transform:translateY(-4px); }
 .quick-icon { font-size:2rem; display:block; margin-bottom:1rem; }
-.quick-name { font-family:'Noto Serif KR',serif; font-size:1rem; color:var(--white); margin-bottom:0.5rem; display:block; }
-.quick-desc { font-size:0.75rem; color:var(--text-muted); line-height:1.8; }
-.quick-arrow { display:block; color:var(--gold); margin-top:1rem; font-size:0.8rem; letter-spacing:0.2em; }
+.quick-name { font-family:'Noto Serif KR',serif; font-size:1rem; color:#f5f7fa; margin-bottom:0.5rem; display:block; }
+.quick-desc { font-size:0.75rem; color:#9aa5b1; line-height:1.8; }
+.quick-arrow { display:block; color:#6ba3d6; margin-top:1rem; font-size:0.8rem; letter-spacing:0.2em; }
 
 @media (max-width:768px) {
   .about-grid { grid-template-columns:1fr; gap:3rem; }
@@ -129,6 +210,7 @@
   .process-grid { grid-template-columns:repeat(2,1fr); }
   .quick-grid { grid-template-columns:repeat(2,1fr); }
   .hero-cta { flex-direction:column; align-items:center; }
+  .gallery-item { width:200px; height:280px; }
 }
 </style>
 </head>
@@ -160,6 +242,8 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="particles" id="particles"></div>
   <div class="hero-content">
     <div class="hero-badge">강남 · 역삼 · 논현 · 삼성동 · 선릉 · 대치동</div>
     <p class="hero-sub">GANGNAM HIGHPUBLIC GUIDE</p>
@@ -175,10 +259,11 @@
       <a href="guide.html" class="btn-outline">이용 가이드 보기</a>
     </div>
   </div>
+  <div class="scroll-hint"><span>SCROLL</span><div class="arrow"></div></div>
 </div>
 
 <!-- ABOUT -->
-<section class="about-section">
+<section class="about-section reveal">
   <div class="about-grid">
     <div class="about-text">
       <span class="section-label">ABOUT</span>
@@ -186,11 +271,11 @@
       <div class="section-divider"></div>
       <p>하이퍼블릭은 일반 퍼블릭보다 한 단계 높은 프리미엄 유흥 업종입니다. 강남 대치동·선릉·역삼·논현·삼성동 일대를 중심으로 발달한 업종으로, 비즈니스 접대부터 특별한 모임까지 폭넓게 활용됩니다.</p>
       <p>룸싸롱보다 합리적인 가격에 퍼블릭보다 높은 서비스 수준을 제공하여 강남 유흥 문화의 새로운 대세로 자리잡고 있습니다.</p>
-      <p>강남권 어디에 계시든 무료 픽업 서비스로 편하게 모십니다. 역삼·논현·신논현·삼성동·선릉·대치동 등 강남 전역에서 이용 가능하며, 고객님의 상황과 목적에 맞는 최적의 자리를 연결해 드립니다.</p>
+      <p>강남권 어디에 계시든 무료 픽업 서비스로 편하게 모십니다. 역삼·논현·신논현·삼성동·선릉·대치동 등 강남 전역에서 이용 가능합니다.</p>
     </div>
     <div>
       <div class="about-stats">
-        <div class="stat-box"><span class="stat-num">24H</span><span class="stat-label">연중무휴 운영</span></div>
+        <div class="stat-box"><span class="stat-num" data-count="24">0</span><span class="stat-label">시간 연중무휴</span></div>
         <div class="stat-box"><span class="stat-num">무료</span><span class="stat-label">상담 · 안내</span></div>
         <div class="stat-box"><span class="stat-num">전역</span><span class="stat-label">강남권 픽업</span></div>
         <div class="stat-box"><span class="stat-num">즉시</span><span class="stat-label">예약 가능</span></div>
@@ -199,68 +284,53 @@
   </div>
 </section>
 
+<!-- GALLERY -->
+<div class="gallery-wrap">
+  <div class="gallery-head reveal">
+    <span class="section-label">GALLERY</span>
+    <h2 class="section-title">강남 하이퍼블릭 미리보기</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="gallery-track-wrap">
+    <div class="gallery-track">
+      <div class="gallery-item g1"></div>
+      <div class="gallery-item g2"></div>
+      <div class="gallery-item g3"></div>
+      <div class="gallery-item g4"></div>
+      <div class="gallery-item g1"></div>
+      <div class="gallery-item g2"></div>
+      <div class="gallery-item g3"></div>
+      <div class="gallery-item g4"></div>
+    </div>
+  </div>
+</div>
+
 <!-- GUIDE -->
 <div class="guide-wrap">
-  <div class="guide-inner">
+  <div class="guide-inner reveal">
     <span class="section-label">KNOW HOW</span>
     <h2 class="section-title">알아두면 좋은 정보</h2>
     <div class="section-divider"></div>
     <div class="guide-grid">
-      <div class="guide-card">
-        <span class="guide-icon">💡</span>
-        <p class="guide-title">하이퍼블릭 vs 퍼블릭</p>
-        <p class="guide-desc">퍼블릭은 비교적 자유롭고 캐주얼한 분위기, 하이퍼블릭은 그보다 정돈된 분위기와 분리된 공간을 지향합니다. 프라이버시와 서비스 수준에서 차이가 납니다.</p>
-      </div>
-      <div class="guide-card">
-        <span class="guide-icon">💡</span>
-        <p class="guide-title">하이퍼블릭 vs 룸싸롱</p>
-        <p class="guide-desc">룸싸롱은 가격대가 높고 지명 시스템 중심입니다. 하이퍼블릭은 합리적인 가격에 비슷한 수준의 서비스를 제공해 가성비를 중시하는 분들이 선호합니다.</p>
-      </div>
-      <div class="guide-card">
-        <span class="guide-icon">💡</span>
-        <p class="guide-title">가격 구조 이해하기</p>
-        <p class="guide-desc">주대(자리 비용), TC(매니저 비용), RT(룸 사용료)로 구성됩니다. 업소마다 차이가 있으며, 1부와 2부 시간대에 따라 주대가 달라집니다.</p>
-      </div>
-      <div class="guide-card">
-        <span class="guide-icon">💡</span>
-        <p class="guide-title">1부 / 2부 구분</p>
-        <p class="guide-desc">보통 자정 또는 새벽 1시를 기준으로 1부와 2부로 나뉩니다. 시간대에 따라 주대 가격에 차이가 있으며 서비스 수준은 동일합니다.</p>
-      </div>
-      <div class="guide-card">
-        <span class="guide-icon">💡</span>
-        <p class="guide-title">처음 방문 시 팁</p>
-        <p class="guide-desc">사전 예약 시 더 좋은 자리를 배정받을 수 있습니다. 인원과 예산을 미리 알려주면 상황에 맞는 안내를 받을 수 있습니다.</p>
-      </div>
-      <div class="guide-card">
-        <span class="guide-icon">💡</span>
-        <p class="guide-title">강남권 이동 방법</p>
-        <p class="guide-desc">강남·역삼·논현·삼성동 등 강남권 전역에서 무료 픽업 서비스를 이용할 수 있습니다. 자가용 이용 시 발렛파킹도 가능합니다.</p>
-      </div>
+      <div class="guide-card"><span class="guide-icon">💡</span><p class="guide-title">하이퍼블릭 vs 퍼블릭</p><p class="guide-desc">퍼블릭은 비교적 자유롭고 캐주얼한 분위기, 하이퍼블릭은 그보다 정돈된 분위기와 분리된 공간을 지향합니다.</p></div>
+      <div class="guide-card"><span class="guide-icon">💡</span><p class="guide-title">하이퍼블릭 vs 룸싸롱</p><p class="guide-desc">룸싸롱은 가격대가 높고 지명 시스템 중심입니다. 하이퍼블릭은 합리적인 가격에 비슷한 수준의 서비스를 제공합니다.</p></div>
+      <div class="guide-card"><span class="guide-icon">💡</span><p class="guide-title">가격 구조 이해하기</p><p class="guide-desc">주대(자리 비용), TC(매니저 비용), RT(룸 사용료)로 구성됩니다. 업소와 시간대에 따라 달라집니다.</p></div>
+      <div class="guide-card"><span class="guide-icon">💡</span><p class="guide-title">1부 / 2부 구분</p><p class="guide-desc">보통 자정 또는 새벽 1시를 기준으로 나뉩니다. 시간대에 따라 주대 가격에 차이가 있습니다.</p></div>
+      <div class="guide-card"><span class="guide-icon">💡</span><p class="guide-title">처음 방문 시 팁</p><p class="guide-desc">사전 예약 시 더 좋은 자리를 배정받을 수 있습니다. 인원과 예산을 미리 알려주면 좋습니다.</p></div>
+      <div class="guide-card"><span class="guide-icon">💡</span><p class="guide-title">강남권 이동 방법</p><p class="guide-desc">강남·역삼·논현·삼성동 등 강남권 전역에서 무료 픽업 서비스를 이용할 수 있습니다.</p></div>
     </div>
   </div>
 </div>
 
 <!-- PRICE -->
-<section class="price-section">
+<section class="price-section reveal">
   <span class="section-label">PRICE</span>
   <h2 class="section-title">가격 안내</h2>
   <div class="section-divider"></div>
   <div class="price-grid">
-    <div class="price-card">
-      <span class="price-name">1부 주대</span>
-      <span class="price-amount">₩100,000~</span>
-      <span class="price-unit">17:00 ~ 01:00 / 인원당</span>
-    </div>
-    <div class="price-card">
-      <span class="price-name">2부 주대</span>
-      <span class="price-amount">₩110,000~</span>
-      <span class="price-unit">01:00 ~ 15:00 / 인원당</span>
-    </div>
-    <div class="price-card">
-      <span class="price-name">상담 문의</span>
-      <span class="price-amount">무료</span>
-      <span class="price-unit">24시간 즉시 상담</span>
-    </div>
+    <div class="price-card"><span class="price-name">1부 주대</span><span class="price-amount">₩100,000~</span><span class="price-unit">17:00 ~ 01:00 / 인원당</span></div>
+    <div class="price-card"><span class="price-name">2부 주대</span><span class="price-amount">₩110,000~</span><span class="price-unit">01:00 ~ 15:00 / 인원당</span></div>
+    <div class="price-card"><span class="price-name">상담 문의</span><span class="price-amount">무료</span><span class="price-unit">24시간 즉시 상담</span></div>
   </div>
   <div class="price-note">
     * 가격은 업소, 시간대, 인원에 따라 상이합니다. 정확한 가격은 상담을 통해 안내해드립니다.<br>
@@ -270,41 +340,21 @@
 
 <!-- PROCESS -->
 <div class="process-wrap">
-  <div class="process-inner">
+  <div class="process-inner reveal">
     <span class="section-label">HOW TO</span>
     <h2 class="section-title">이용 방법</h2>
     <div class="section-divider"></div>
     <div class="process-grid">
-      <div class="process-card">
-        <span class="process-num">01</span>
-        <span class="process-icon">📞</span>
-        <p class="process-title">상담 문의</p>
-        <p class="process-desc">전화 또는 카카오톡으로 방문 인원, 시간, 예산을 알려주세요.</p>
-      </div>
-      <div class="process-card">
-        <span class="process-num">02</span>
-        <span class="process-icon">🎯</span>
-        <p class="process-title">맞춤 안내</p>
-        <p class="process-desc">상황에 맞는 최적의 자리와 가격을 안내해드립니다.</p>
-      </div>
-      <div class="process-card">
-        <span class="process-num">03</span>
-        <span class="process-icon">🚗</span>
-        <p class="process-title">픽업 or 방문</p>
-        <p class="process-desc">강남권 무료 픽업 또는 선릉역 도보 5분 직접 방문.</p>
-      </div>
-      <div class="process-card">
-        <span class="process-num">04</span>
-        <span class="process-icon">🥂</span>
-        <p class="process-title">즐기기</p>
-        <p class="process-desc">프라이빗한 공간에서 최상의 서비스를 경험하세요.</p>
-      </div>
+      <div class="process-card"><span class="process-num">01</span><span class="process-icon">📞</span><p class="process-title">상담 문의</p><p class="process-desc">전화 또는 카카오톡으로 방문 인원, 시간, 예산을 알려주세요.</p></div>
+      <div class="process-card"><span class="process-num">02</span><span class="process-icon">🎯</span><p class="process-title">맞춤 안내</p><p class="process-desc">상황에 맞는 최적의 자리와 가격을 안내해드립니다.</p></div>
+      <div class="process-card"><span class="process-num">03</span><span class="process-icon">🚗</span><p class="process-title">픽업 or 방문</p><p class="process-desc">강남권 무료 픽업 또는 선릉역 도보 5분 직접 방문.</p></div>
+      <div class="process-card"><span class="process-num">04</span><span class="process-icon">🥂</span><p class="process-title">즐기기</p><p class="process-desc">프라이빗한 공간에서 최상의 서비스를 경험하세요.</p></div>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
-<section class="cta-section">
+<section class="cta-section reveal">
   <div class="cta-box">
     <h2 class="cta-title">강남권 전 지역 무료 픽업</h2>
     <p class="cta-desc">
@@ -320,45 +370,22 @@
 </section>
 
 <!-- QUICK -->
-<section class="quick-links">
+<section class="quick-links reveal">
   <span class="section-label">QUICK MENU</span>
   <h2 class="section-title">바로가기</h2>
   <div class="section-divider"></div>
   <div class="quick-grid">
-    <a href="guide.html" class="quick-card">
-      <span class="quick-icon">📖</span>
-      <span class="quick-name">이용 가이드</span>
-      <span class="quick-desc">처음 방문자를 위한<br>완벽 가이드</span>
-      <span class="quick-arrow">VIEW →</span>
-    </a>
-    <a href="price.html" class="quick-card">
-      <span class="quick-icon">💰</span>
-      <span class="quick-name">가격 안내</span>
-      <span class="quick-desc">강남 최저가<br>투명한 가격 구조</span>
-      <span class="quick-arrow">VIEW →</span>
-    </a>
-    <a href="blog.html" class="quick-card">
-      <span class="quick-icon">📝</span>
-      <span class="quick-name">블로그</span>
-      <span class="quick-desc">하이퍼블릭 정보<br>이용 팁 모음</span>
-      <span class="quick-arrow">VIEW →</span>
-    </a>
-    <a href="location.html" class="quick-card">
-      <span class="quick-icon">📍</span>
-      <span class="quick-name">오시는 길</span>
-      <span class="quick-desc">선릉역 1번 출구<br>도보 5분</span>
-      <span class="quick-arrow">VIEW →</span>
-    </a>
+    <a href="guide.html" class="quick-card"><span class="quick-icon">📖</span><span class="quick-name">이용 가이드</span><span class="quick-desc">처음 방문자를 위한<br>완벽 가이드</span><span class="quick-arrow">VIEW →</span></a>
+    <a href="price.html" class="quick-card"><span class="quick-icon">💰</span><span class="quick-name">가격 안내</span><span class="quick-desc">투명한<br>가격 구조 설명</span><span class="quick-arrow">VIEW →</span></a>
+    <a href="blog.html" class="quick-card"><span class="quick-icon">📝</span><span class="quick-name">블로그</span><span class="quick-desc">하이퍼블릭 정보<br>이용 팁 모음</span><span class="quick-arrow">VIEW →</span></a>
+    <a href="location.html" class="quick-card"><span class="quick-icon">📍</span><span class="quick-name">오시는 길</span><span class="quick-desc">선릉역 1번 출구<br>도보 5분</span><span class="quick-arrow">VIEW →</span></a>
   </div>
 </section>
 
 <footer>
   <span class="footer-logo">GUIDE</span>
   <a href="tel:010-8145-1911" class="footer-tel">010-8145-1911</a>
-  <p class="footer-info">
-    강남 하이퍼블릭 전문 안내 · 선릉역 · 대치동 · 역삼동<br>
-    © 2025 GANGNAM HIGHPUBLIC GUIDE. All rights reserved.
-  </p>
+  <p class="footer-info">강남 하이퍼블릭 전문 안내 · 선릉역 · 대치동 · 역삼동<br>© 2025 GANGNAM HIGHPUBLIC GUIDE. All rights reserved.</p>
 </footer>
 
 <div class="float-cta">
@@ -371,6 +398,45 @@ function toggleDrawer(btn) {
   btn.classList.toggle('open');
   document.getElementById('navDrawer').classList.toggle('open');
 }
+
+// 빛 입자 생성
+const pc = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDuration = (6 + Math.random() * 8) + 's';
+  p.style.animationDelay = (Math.random() * 8) + 's';
+  const size = 2 + Math.random() * 3;
+  p.style.width = size + 'px';
+  p.style.height = size + 'px';
+  pc.appendChild(p);
+}
+
+// 스크롤 등장 애니메이션
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// 숫자 카운트업
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.count);
+      let cur = 0;
+      const step = Math.ceil(target / 30);
+      const timer = setInterval(() => {
+        cur += step;
+        if (cur >= target) { cur = target; clearInterval(timer); }
+        el.textContent = cur;
+      }, 40);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
 </script>
 </body>
 </html>
