@@ -84,7 +84,7 @@ img{max-width:100%;display:block}
 .topbar .logo{
   font-family:'Great Vibes',cursive;
   font-size:2rem;line-height:1;color:var(--ink);
-  padding-top:4px;
+  padding-top:4px;display:inline-block;
 }
 .topbar .logo small{
   font-family:'Noto Sans KR',sans-serif;font-size:.68rem;font-weight:500;
@@ -225,7 +225,12 @@ img{max-width:100%;display:block}
 .v-head .x{margin-left:auto;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:4px 8px}
 .v-body{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .v-body img{width:100%;height:100%;object-fit:contain}
+.v-bgimg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(.32) saturate(.95);
+}
 .v-text{
+  position:relative;z-index:2;
   padding:40px 30px;text-align:center;color:#fff;max-width:420px;
 }
 .v-text .em{font-size:2.6rem;display:block;margin-bottom:20px}
@@ -286,7 +291,7 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
 
   <!-- 상단바: 간판 필기체 로고 -->
   <div class="topbar">
-    <div class="logo">Elite<small>엘리트</small></div>
+    <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Elite<small>엘리트</small></a>
     <a class="call" href="tel:010-8145-1911">📞 문의</a>
   </div>
 
@@ -604,14 +609,28 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
 // ===== 스토리 데이터 =====
 // 문구 수정은 아래 텍스트만 바꾸면 됩니다.
+// ===== 스토리 배경 사진 풀 =====
+// 오늘출근: 여성만 나오는 사진 / 가게상황: 인물 없는 룸·공간·술 사진
+const GIRLS_POOL = ['story_stand.jpg','story_trio2.jpg','story_sofa.jpg','story_laugh.jpg','story_velvet.jpg','story_chairs.jpg','story_look.jpg','story_green.jpg','post_trio.jpg','post_duet.jpg','feed_black.jpg','feed_green.jpg'];
+const SPACE_POOL = ['post_room.jpg','post_hall.jpg','feed_lounge.jpg','feed_cheers.jpg'];
+function pick(pool, n){
+  const a = [...pool];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
+
 // ===== 오늘출근 숫자: 70분마다 변경, 모든 방문자 동일 (KST 기준) =====
 // 월~토: 130~200명 (10명 단위) / 일요일: 직접 문의
 function staffSlides(){
   const kst = new Date(Date.now() + 9*3600*1000);           // UTC+9
   const isSunday = kst.getUTCDay() === 0;
   if (isSunday) {
+    const [b1] = pick(GIRLS_POOL, 1);
     return [
-      {type:'text', cls:'st-staff', em:'📞', h:'일요일 출근 현황은<br>직접 문의해주세요', p:'일요일은 스케줄 변동이 있어<br>실시간으로 안내해드려요.', cta:'카톡으로 확인하기'}
+      {type:'text', cls:'st-staff', bg:b1, em:'📞', h:'일요일 출근 현황은<br>직접 문의해주세요', p:'일요일은 스케줄 변동이 있어<br>실시간으로 안내해드려요.', cta:'카톡으로 확인하기'}
     ];
   }
   const win = Math.floor(kst.getTime() / (70*60*1000));      // 70분 구간 번호
@@ -620,9 +639,28 @@ function staffSlides(){
   h = Math.imul(h ^ (h >>> 13), 3266489909);
   h = (h ^ (h >>> 16)) >>> 0;
   const count = 130 + (h % 8) * 10;                           // 130,140,...,200
+  const [b1, b2] = pick(GIRLS_POOL, 2);
   return [
-    {type:'text', cls:'st-staff', em:'👥', h:`현재 출근<br><span style="font-size:2.2em;color:#93c5fd">${count}명</span>`, p:'지금 이 시간 기준<br>출근 매니저 인원이에요.', cta:'스타일 추천 받기'},
-    {type:'text', cls:'st-staff', em:'✨', h:'취향껏<br>고르세요', p:`${count}명 중에서 원하는 분위기를<br>말씀해주시면 딱 맞게 안내해드려요.`, cta:'카톡으로 물어보기'}
+    {type:'text', cls:'st-staff', bg:b1, em:'👥', h:`현재 출근<br><span style="font-size:2.2em;color:#93c5fd">${count}명</span>`, p:'지금 이 시간 기준<br>출근 매니저 인원이에요.', cta:'스타일 추천 받기'},
+    {type:'text', cls:'st-staff', bg:b2, em:'✨', h:'취향껏<br>고르세요', p:`${count}명 중에서 원하는 분위기를<br>말씀해주시면 딱 맞게 안내해드려요.`, cta:'카톡으로 물어보기'}
+  ];
+}
+
+// ===== 가게상황: 23시~06시는 웨이팅 안내, 그 외엔 이용 가능 (KST 기준) =====
+function statusSlides(){
+  const kst = new Date(Date.now() + 9*3600*1000);
+  const hour = kst.getUTCHours();
+  const busy = (hour >= 23 || hour < 6);
+  const [b1, b2] = pick(SPACE_POOL, 2);
+  if (busy) {
+    return [
+      {type:'text', cls:'st-status', bg:b1, em:'🔥', h:'지금은<br>피크 타임이에요', p:'이 시간대는 웨이팅이 있을 수 있어요.<br>방문 전 문의 주시면 정확히 안내해드려요.', cta:'대기 상황 문의하기'},
+      {type:'text', cls:'st-status', bg:b2, em:'🚗', h:'픽업은<br>대기 없이', p:'문의 주시고 출발하시면<br>도착 타이밍에 맞춰 안내해드려요.', cta:'픽업 요청하기'}
+    ];
+  }
+  return [
+    {type:'text', cls:'st-status', bg:b1, em:'🚪', h:'현재 룸<br>이용 가능', p:'지금 오셔도 대기 없이<br>바로 안내 가능해요.', cta:'실시간 상황 확인'},
+    {type:'text', cls:'st-status', bg:b2, em:'🚗', h:'픽업 대기 중', p:'강남권 어디서든<br>전화 주시면 모시러 갑니다.', cta:'픽업 요청하기'}
   ];
 }
 
@@ -632,23 +670,21 @@ const STORIES = {
     {type:'text', cls:'st-event', em:'🎉', h:'주대 이벤트<br>준비 중', p:'초저녁 할인, 첫 방문 혜택 —<br>확정되는 대로 여기서 공개할게요.', cta:'제일 먼저 알림 받기'},
     {type:'text', cls:'st-event', em:'⏰', h:'초저녁이<br>제일 저렴해요', p:'1부(17:00~) 이른 시간대가<br>가장 합리적인 타이밍이에요.', cta:'오늘 타이밍 문의'}
   ]},
+  // 가게사진: 새 사진이 생기면 이 배열 '맨 앞'에 추가하세요 (최신순 노출)
   photos: { label: '가게사진', slides: [
+    {type:'img', src:'story_look.jpg'},
     {type:'img', src:'story_stand.jpg'},
     {type:'img', src:'story_trio2.jpg'},
+    {type:'img', src:'story_chairs.jpg'},
     {type:'img', src:'story_sofa.jpg'},
     {type:'img', src:'story_laugh.jpg'},
     {type:'img', src:'story_velvet.jpg'},
-    {type:'img', src:'story_chairs.jpg'},
-    {type:'img', src:'story_look.jpg'},
     {type:'img', src:'story_green.jpg'},
     {type:'img', src:'feed_black.jpg'},
     {type:'img', src:'feed_lounge.jpg'}
   ]},
   staff: { label: '오늘출근', get slides(){ return staffSlides(); } },
-  status: { label: '가게상황', slides: [
-    {type:'text', cls:'st-status', em:'🚪', h:'현재 룸<br>이용 가능', p:'지금 오셔도 대기 없이<br>바로 안내 가능해요.', cta:'실시간 상황 확인'},
-    {type:'text', cls:'st-status', em:'🚗', h:'픽업 대기 중', p:'강남권 어디서든<br>전화 주시면 모시러 갑니다.', cta:'픽업 요청하기'}
-  ]},
+  status: { label: '가게상황', get slides(){ return statusSlides(); } },
   price: { label: '가격', slides: [
     {type:'text', cls:'st-price', em:'💰', h:'비용 구성', p:'주대(자리) + TC(매니저) + RT(룸)<br>인원·시간대에 따라 달라져요.', cta:'예상 비용 물어보기'},
     {type:'text', cls:'st-price', em:'🧾', h:'숨은 비용 없이<br>투명하게', p:'방문 전에 미리 정확한<br>예상 비용을 알려드려요.', cta:'가격 안내 보기', href:'price.html'}
@@ -699,6 +735,12 @@ function showSlide(){
   } else {
     vBody.style.background = '';
     vBody.classList.add(s.cls);
+    if (s.bg) {
+      const bg = document.createElement('img');
+      bg.className = 'v-bgimg';
+      bg.src = s.bg; bg.alt = '';
+      vBody.prepend(bg);
+    }
     const div = document.createElement('div');
     div.className = 'v-text';
     div.innerHTML = `<span class="em">${s.em}</span><h4>${s.h}</h4><p>${s.p}</p>` +
