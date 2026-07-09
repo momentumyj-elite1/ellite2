@@ -6,8 +6,7 @@
 <title>강남 하이퍼블릭 가이드 | 선릉 가라오케 엘리트</title>
 <meta name="description" content="강남 하이퍼블릭 처음이라면? 가격 구조, 이용 방법, 무료 픽업까지 피드로 쉽게 보는 강남·선릉 하이퍼블릭 가라오케 가이드. 24시간 문의 가능.">
 <meta name="keywords" content="강남 하이퍼블릭, 선릉 가라오케, 강남 가라오케, 하이퍼블릭이란, 강남 하이퍼블릭 가격, 선릉 하이퍼블릭, 역삼 가라오케, 강남 회식 2차">
-<!-- Search Console 인증 태그 자리: 발급받으면 아래 줄의 주석을 풀고 content 값을 넣으세요 -->
-<!-- <meta name="google-site-verification" content="여기에_인증코드"> -->
+<meta name="google-site-verification" content="nXfh-nX4XjMPQoolCdCxs0L3nHLWidaxJ65c_OnK_bU" />
 <meta name="geo.region" content="KR-11">
 <meta name="geo.placename" content="강남구 선릉 역삼동">
 <meta property="og:title" content="강남 하이퍼블릭 가이드 | 엘리트">
@@ -486,6 +485,28 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
 // ===== 스토리 데이터 =====
 // 문구 수정은 아래 텍스트만 바꾸면 됩니다.
+// ===== 오늘출근 숫자: 70분마다 변경, 모든 방문자 동일 (KST 기준) =====
+// 월~토: 130~200명 (10명 단위) / 일요일: 직접 문의
+function staffSlides(){
+  const kst = new Date(Date.now() + 9*3600*1000);           // UTC+9
+  const isSunday = kst.getUTCDay() === 0;
+  if (isSunday) {
+    return [
+      {type:'text', cls:'st-staff', em:'📞', h:'일요일 출근 현황은<br>직접 문의해주세요', p:'일요일은 스케줄 변동이 있어<br>실시간으로 안내해드려요.', cta:'카톡으로 확인하기'}
+    ];
+  }
+  const win = Math.floor(kst.getTime() / (70*60*1000));      // 70분 구간 번호
+  let h = win >>> 0;                                          // 구간 번호 → 해시
+  h = Math.imul(h ^ (h >>> 16), 2246822507);
+  h = Math.imul(h ^ (h >>> 13), 3266489909);
+  h = (h ^ (h >>> 16)) >>> 0;
+  const count = 130 + (h % 8) * 10;                           // 130,140,...,200
+  return [
+    {type:'text', cls:'st-staff', em:'👥', h:`현재 출근<br><span style="font-size:2.2em;color:#93c5fd">${count}명</span>`, p:'지금 이 시간 기준<br>출근 매니저 인원이에요.', cta:'스타일 추천 받기'},
+    {type:'text', cls:'st-staff', em:'✨', h:'취향껏<br>고르세요', p:`${count}명 중에서 원하는 분위기를<br>말씀해주시면 딱 맞게 안내해드려요.`, cta:'카톡으로 물어보기'}
+  ];
+}
+
 const KAKAO = 'https://open.kakao.com/o/sz2MASAi';
 const STORIES = {
   event: { label: '이벤트', slides: [
@@ -498,10 +519,7 @@ const STORIES = {
     {type:'img', src:'feed_green.jpg'},
     {type:'img', src:'feed_cheers.jpg'}
   ]},
-  staff: { label: '오늘출근', slides: [
-    {type:'text', cls:'st-staff', em:'👥', h:'오늘도<br>정상 출근 완료', p:'매일 수준 높은 매니저들이<br>출근하고 있어요.', cta:'실시간 출근 현황 문의'},
-    {type:'text', cls:'st-staff', em:'✨', h:'오늘의 추천', p:'취향을 말씀해주시면<br>딱 맞게 안내해드려요.', cta:'카톡으로 물어보기'}
-  ]},
+  staff: { label: '오늘출근', get slides(){ return staffSlides(); } },
   status: { label: '가게상황', slides: [
     {type:'text', cls:'st-status', em:'🚪', h:'현재 룸<br>이용 가능', p:'지금 오셔도 대기 없이<br>바로 안내 가능해요.', cta:'실시간 상황 확인'},
     {type:'text', cls:'st-status', em:'🚗', h:'픽업 대기 중', p:'강남권 어디서든<br>전화 주시면 모시러 갑니다.', cta:'픽업 요청하기'}
