@@ -19,7 +19,7 @@
 <link rel="canonical" href="https://ellite.co.kr">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,6 +55,7 @@ body{
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
+.script{font-family:'Great Vibes',cursive;font-weight:400}
 
 /* ===== 폰 프레임 컬럼 ===== */
 .app{
@@ -62,7 +63,7 @@ img{max-width:100%;display:block}
   background:var(--card);
   min-height:100vh;
   border-left:1px solid var(--line);border-right:1px solid var(--line);
-  padding-bottom:86px; /* DM바 공간 */
+  padding-bottom:86px;
 }
 @media (min-width:520px){
   body{
@@ -77,12 +78,19 @@ img{max-width:100%;display:block}
 .topbar{
   position:sticky;top:0;z-index:50;
   display:flex;align-items:center;justify-content:space-between;
-  padding:14px 18px;
+  padding:10px 18px;
   background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
 }
-.topbar .id{font-weight:900;font-size:1.15rem;letter-spacing:-.02em}
-.topbar .id span{color:var(--blue)}
+.topbar .logo{
+  font-family:'Great Vibes',cursive;
+  font-size:2rem;line-height:1;color:var(--ink);
+  padding-top:4px;
+}
+.topbar .logo small{
+  font-family:'Noto Sans KR',sans-serif;font-size:.68rem;font-weight:500;
+  color:var(--gray);letter-spacing:.3em;vertical-align:middle;margin-left:8px;
+}
 .topbar a.call{
   font-size:.82rem;font-weight:700;color:#fff;background:var(--blue);
   padding:7px 16px;border-radius:8px;transition:.25s;
@@ -93,13 +101,23 @@ img{max-width:100%;display:block}
 .profile{padding:22px 18px 6px}
 .p-top{display:flex;align-items:center;gap:22px}
 .avatar{
-  width:84px;height:84px;border-radius:50%;flex-shrink:0;
+  width:86px;height:86px;border-radius:50%;flex-shrink:0;
   background:
-    linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(#111,#111) padding-box,
     linear-gradient(45deg,#2563eb,#60a5fa,#93c5fd) border-box;
   border:3px solid transparent;
   display:flex;align-items:center;justify-content:center;
-  font-weight:900;font-size:1.5rem;color:var(--blue);letter-spacing:-.03em;
+  cursor:pointer;transition:.25s;position:relative;
+}
+.avatar:active{transform:scale(.94)}
+.avatar .e{
+  font-family:'Great Vibes',cursive;font-size:2.6rem;color:#fff;
+  padding-top:6px;
+}
+.avatar .live{
+  position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);
+  background:var(--blue);color:#fff;font-size:.58rem;font-weight:700;
+  letter-spacing:.12em;padding:2px 8px;border-radius:99px;border:2px solid #fff;
 }
 .p-stats{display:flex;gap:0;flex:1;justify-content:space-around;text-align:center}
 .p-stats b{display:block;font-size:1.05rem;font-weight:900}
@@ -118,21 +136,21 @@ img{max-width:100%;display:block}
 
 /* ===== 스토리 하이라이트 ===== */
 .stories{
-  display:flex;gap:16px;overflow-x:auto;
+  display:flex;gap:14px;overflow-x:auto;
   padding:18px;scrollbar-width:none;
 }
 .stories::-webkit-scrollbar{display:none}
-.story{flex-shrink:0;text-align:center;width:66px}
+.story{flex-shrink:0;text-align:center;width:64px;cursor:pointer;background:none;border:none;font-family:inherit}
 .story .ring{
-  width:62px;height:62px;border-radius:50%;
+  width:60px;height:60px;border-radius:50%;
   background:
     linear-gradient(#fff,#fff) padding-box,
     linear-gradient(45deg,#2563eb,#93c5fd) border-box;
   border:2.5px solid transparent;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;transition:.25s;
+  font-size:1.45rem;transition:.25s;margin:0 auto;
 }
-.story:active .ring{transform:scale(.93)}
+.story:active .ring{transform:scale(.92)}
 .story span{display:block;margin-top:6px;font-size:.72rem;color:var(--ink)}
 
 /* ===== 피드 ===== */
@@ -140,16 +158,16 @@ img{max-width:100%;display:block}
 .post-head{display:flex;align-items:center;gap:11px;padding:12px 16px}
 .post-head .pfp{
   width:36px;height:36px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(45deg,#2563eb,#60a5fa);
-  color:#fff;font-weight:900;font-size:.82rem;
+  background:#111;color:#fff;
   display:flex;align-items:center;justify-content:center;
 }
+.post-head .pfp span{font-family:'Great Vibes',cursive;font-size:1.15rem;padding-top:3px}
 .post-head .who b{display:block;font-size:.86rem;font-weight:700;line-height:1.3}
 .post-head .who span{font-size:.74rem;color:var(--gray)}
 .post-img{aspect-ratio:4/5;overflow:hidden;background:#eee}
 .post-img img{width:100%;height:100%;object-fit:cover}
 
-/* 텍스트 카드형 게시물 (이벤트/공지) */
+/* 텍스트 카드형 게시물 */
 .post-card{
   aspect-ratio:4/5;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;
@@ -166,20 +184,65 @@ img{max-width:100%;display:block}
   line-height:1.35;letter-spacing:-.02em;
 }
 .post-card p{color:rgba(255,255,255,.85);font-size:.9rem;margin-top:14px}
-.post-card .deco{
-  position:absolute;border-radius:50%;background:rgba(255,255,255,.09);
-}
+.post-card .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.09)}
 .post-card .d1{width:220px;height:220px;top:-70px;right:-70px}
 .post-card .d2{width:150px;height:150px;bottom:-50px;left:-40px}
 
 .post-actions{display:flex;align-items:center;gap:16px;padding:11px 16px 0;font-size:1.4rem}
 .post-actions .save{margin-left:auto}
 .likes{padding:8px 16px 0;font-size:.86rem;font-weight:700}
-.caption{padding:4px 16px 14px;font-size:.9rem}
+.caption{padding:4px 16px 4px;font-size:.9rem}
 .caption b{font-weight:700;margin-right:6px}
 .caption .more a{color:var(--blue);font-weight:500}
 .caption .tags{display:block;margin-top:6px;color:var(--blue);font-size:.84rem}
-.caption .time{display:block;margin-top:8px;font-size:.72rem;color:var(--gray);letter-spacing:.04em}
+.comments{padding:0 16px 14px;font-size:.84rem;color:var(--gray)}
+
+/* ===== 스토리 뷰어 오버레이 ===== */
+.viewer{
+  position:fixed;inset:0;z-index:200;background:#000;
+  display:none;flex-direction:column;
+}
+.viewer.open{display:flex}
+.v-progress{display:flex;gap:5px;padding:12px 12px 0}
+.v-progress i{
+  flex:1;height:2.5px;border-radius:99px;background:rgba(255,255,255,.3);
+  overflow:hidden;position:relative;
+}
+.v-progress i::after{
+  content:'';position:absolute;inset:0;background:#fff;
+  transform:scaleX(0);transform-origin:left;
+}
+.v-progress i.done::after{transform:scaleX(1)}
+.v-progress i.now::after{animation:fill 5s linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.v-head{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff}
+.v-head .pfp{
+  width:34px;height:34px;border-radius:50%;background:#1e293b;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.v-head .pfp span{font-family:'Great Vibes',cursive;font-size:1.1rem;padding-top:3px}
+.v-head b{font-size:.86rem;font-weight:700}
+.v-head small{font-size:.74rem;color:rgba(255,255,255,.6);margin-left:4px}
+.v-head .x{margin-left:auto;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:4px 8px}
+.v-body{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.v-body img{width:100%;height:100%;object-fit:contain}
+.v-text{
+  padding:40px 30px;text-align:center;color:#fff;max-width:420px;
+}
+.v-text .em{font-size:2.6rem;display:block;margin-bottom:20px}
+.v-text h4{font-size:1.6rem;font-weight:900;line-height:1.4;margin-bottom:14px}
+.v-text p{color:rgba(255,255,255,.8);font-size:.95rem;line-height:1.9}
+.v-text .cta{
+  display:inline-block;margin-top:26px;background:#fff;color:#111;
+  font-weight:700;font-size:.9rem;padding:12px 28px;border-radius:99px;
+}
+.v-tap{position:absolute;top:0;bottom:0;width:35%;z-index:5}
+.v-tap.prev{left:0}
+.v-tap.next{right:0;width:65%}
+.st-event{background:linear-gradient(160deg,#1d4ed8,#2563eb 50%,#60a5fa)}
+.st-staff{background:linear-gradient(160deg,#0f172a,#1e293b)}
+.st-status{background:linear-gradient(160deg,#111827,#1f2937)}
+.st-price{background:linear-gradient(160deg,#1e3a8a,#2563eb)}
 
 /* ===== DM 고정바 ===== */
 .dmbar{
@@ -209,12 +272,12 @@ footer .links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-s
 footer .links a{color:var(--blue)}
 footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
 
-/* 리빌 */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
 .rv.on{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  *{transition:none!important}
+  *{transition:none!important;animation:none!important}
   .rv{opacity:1;transform:none}
+  .v-progress i.now::after{transform:scaleX(1)}
 }
 </style>
 </head>
@@ -222,16 +285,19 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
 
 <div class="app">
 
-  <!-- 상단바 -->
+  <!-- 상단바: 간판 필기체 로고 -->
   <div class="topbar">
-    <div class="id">ellite<span>.gangnam</span></div>
+    <div class="logo">Elite<small>엘리트</small></div>
     <a class="call" href="tel:010-8145-1911">📞 문의</a>
   </div>
 
-  <!-- 프로필 -->
+  <!-- 프로필: 아바타 탭 → 이벤트 스토리 -->
   <section class="profile">
     <div class="p-top">
-      <div class="avatar">E</div>
+      <button class="avatar" onclick="openStory('event')" aria-label="이벤트 스토리 보기">
+        <span class="e">E</span>
+        <span class="live">EVENT</span>
+      </button>
       <div class="p-stats">
         <div><b>24H</b><span>연중무휴</span></div>
         <div><b>5분</b><span>선릉역 1번출구</span></div>
@@ -250,41 +316,39 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
     </div>
   </section>
 
-  <!-- 스토리 하이라이트 -->
+  <!-- 스토리 하이라이트: 가게사진 / 오늘출근 / 가게상황 / 이벤트 / 가격 -->
   <div class="stories">
-    <a class="story" href="price.html"><div class="ring">💰</div><span>가격</span></a>
-    <a class="story" href="#post-hours"><div class="ring">⏰</div><span>영업시간</span></a>
-    <a class="story" href="#post-pickup"><div class="ring">🚗</div><span>무료픽업</span></a>
-    <a class="story" href="#post-event"><div class="ring">🎉</div><span>이벤트</span></a>
-    <a class="story" href="guide.html"><div class="ring">📖</div><span>가이드</span></a>
-    <a class="story" href="blog.html"><div class="ring">✍️</div><span>블로그</span></a>
+    <button class="story" onclick="openStory('photos')"><div class="ring">📸</div><span>가게사진</span></button>
+    <button class="story" onclick="openStory('staff')"><div class="ring">👥</div><span>오늘출근</span></button>
+    <button class="story" onclick="openStory('status')"><div class="ring">🚪</div><span>가게상황</span></button>
+    <button class="story" onclick="openStory('event')"><div class="ring">🎉</div><span>이벤트</span></button>
+    <button class="story" onclick="openStory('price')"><div class="ring">💰</div><span>가격</span></button>
   </div>
 
   <!-- FEED -->
 
-  <!-- 1. 처음이라면 -->
   <article class="post rv">
     <div class="post-head">
-      <div class="pfp">E</div>
-      <div class="who"><b>ellite.gangnam</b><span>선릉역 1번 출구 · 도보 5분</span></div>
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>선릉역 1번 출구 · 도보 5분</span></div>
     </div>
     <div class="post-img"><img src="feed_black.jpg" alt="강남 하이퍼블릭 프라이빗 라운지" loading="lazy"></div>
-    <div class="post-actions"><span>🤍</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 682개</div>
     <div class="caption">
-      <b>ellite.gangnam</b>강남 하이퍼블릭이 처음이라면? 어렵게 생각하지 마세요.
+      <b>elite.gangnam</b>강남 하이퍼블릭이 처음이라면? 어렵게 생각하지 마세요.
       프라이빗 룸에서 편하게 즐기는 프리미엄 라운지예요. 룸싸롱보다 합리적인 가격,
       퍼블릭보다 높은 수준 — 그 사이의 딱 좋은 지점이 하이퍼블릭이에요.
       <span class="more">궁금한 건 <a href="guide.html">이용가이드</a>에서 →</span>
       <span class="tags">#강남하이퍼블릭 #하이퍼블릭이란 #선릉가라오케 #강남술집추천</span>
-      <span class="time">고정된 게시물</span>
     </div>
+    <div class="comments">댓글 41개 모두 보기</div>
   </article>
 
-  <!-- 2. 이벤트 (문구 교체용 카드) -->
   <article class="post rv" id="post-event">
     <div class="post-head">
-      <div class="pfp">E</div>
-      <div class="who"><b>ellite.gangnam</b><span>이벤트</span></div>
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>이벤트</span></div>
     </div>
     <div class="post-card pc-event">
       <div class="deco d1"></div><div class="deco d2"></div>
@@ -292,70 +356,73 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
       <h3>이번 주<br>주대 이벤트<br>준비 중 🎉</h3>
       <p>오픈 예정 — 문의 주시면<br>가장 먼저 알려드릴게요</p>
     </div>
-    <div class="post-actions"><span>🤍</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 517개</div>
     <div class="caption">
-      <b>ellite.gangnam</b>주대 할인 이벤트를 준비하고 있어요.
+      <b>elite.gangnam</b>주대 할인 이벤트를 준비하고 있어요.
       초저녁 타임 할인, 첫 방문 혜택 등 — 확정되는 대로 이 자리에서 공개할게요.
       미리 문의 주시면 이벤트 시작 시 바로 안내해드려요.
       <span class="tags">#강남가라오케이벤트 #주대할인 #강남하이퍼블릭가격</span>
-      <span class="time">EVENT</span>
     </div>
+    <div class="comments">댓글 28개 모두 보기</div>
   </article>
 
-  <!-- 3. 가격 -->
   <article class="post rv">
     <div class="post-head">
-      <div class="pfp">E</div>
-      <div class="who"><b>ellite.gangnam</b><span>가격 안내</span></div>
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>가격 안내</span></div>
     </div>
     <div class="post-img"><img src="feed_green.jpg" alt="강남 하이퍼블릭 가격 안내 라운지" loading="lazy"></div>
-    <div class="post-actions"><span>🤍</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 854개</div>
     <div class="caption">
-      <b>ellite.gangnam</b>가격, 제일 궁금하시죠? 비용은 주대(자리) + TC(매니저) + RT(룸)로
+      <b>elite.gangnam</b>가격, 제일 궁금하시죠? 비용은 주대(자리) + TC(매니저) + RT(룸)로
       구성돼요. 인원과 시간대에 따라 달라지니, 방문 전에 문의 주시면
       예상 비용을 미리 정확하게 알려드려요. 숨은 비용 없이 투명하게.
       <span class="more">자세한 구조는 <a href="price.html">가격안내</a>에서 →</span>
       <span class="tags">#강남하이퍼블릭가격 #강남가라오케가격 #선릉가라오케</span>
     </div>
+    <div class="comments">댓글 63개 모두 보기</div>
   </article>
 
-  <!-- 4. 무료 픽업 -->
   <article class="post rv" id="post-pickup">
     <div class="post-head">
-      <div class="pfp">E</div>
-      <div class="who"><b>ellite.gangnam</b><span>강남권 전역</span></div>
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>강남권 전역</span></div>
     </div>
     <div class="post-img"><img src="feed_cheers.jpg" alt="강남 가라오케 무료 픽업 서비스" loading="lazy"></div>
-    <div class="post-actions"><span>🤍</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 439개</div>
     <div class="caption">
-      <b>ellite.gangnam</b>강남 · 역삼 · 논현 · 삼성동 · 선릉 · 대치동 —
+      <b>elite.gangnam</b>강남 · 역삼 · 논현 · 삼성동 · 선릉 · 대치동 —
       강남권 어디서든 무료 픽업 가능해요. 전화 한 통이면 계신 곳으로
       모시러 갑니다. 발렛파킹도 무료. 이동 걱정은 저희가 할게요.
       <span class="tags">#강남무료픽업 #강남가라오케 #역삼가라오케 #회식2차</span>
     </div>
+    <div class="comments">댓글 19개 모두 보기</div>
   </article>
 
-  <!-- 5. 분위기 -->
   <article class="post rv">
     <div class="post-head">
-      <div class="pfp">E</div>
-      <div class="who"><b>ellite.gangnam</b><span>프라이빗 라운지</span></div>
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>프라이빗 라운지</span></div>
     </div>
     <div class="post-img"><img src="feed_lounge.jpg" alt="선릉 하이퍼블릭 프라이빗 룸 인테리어" loading="lazy"></div>
-    <div class="post-actions"><span>🤍</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 726개</div>
     <div class="caption">
-      <b>ellite.gangnam</b>오늘의 룸 컨디션. 프라이빗한 독립 룸이라
+      <b>elite.gangnam</b>오늘의 룸 컨디션. 프라이빗한 독립 룸이라
       옆 테이블 신경 쓸 일이 없어요. 최고급 음향 시설로 노래방 시스템까지 —
       생일 모임, 회식 2차, 접대 자리 전부 소화 가능한 공간이에요.
       <span class="tags">#강남룸 #선릉하이퍼블릭 #강남회식 #강남접대</span>
     </div>
+    <div class="comments">댓글 35개 모두 보기</div>
   </article>
 
-  <!-- 6. 영업시간 (공지 카드) -->
   <article class="post rv" id="post-hours">
     <div class="post-head">
-      <div class="pfp">E</div>
-      <div class="who"><b>ellite.gangnam</b><span>공지</span></div>
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>공지</span></div>
     </div>
     <div class="post-card pc-notice">
       <div class="deco d1"></div><div class="deco d2"></div>
@@ -363,16 +430,17 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
       <h3>365일 연중무휴<br>24시간 영업</h3>
       <p>1부 17:00 – 01:00<br>2부 01:00 – 15:00</p>
     </div>
-    <div class="post-actions"><span>🤍</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 391개</div>
     <div class="caption">
-      <b>ellite.gangnam</b>공휴일에도, 새벽에도, 낮에도 — 언제든 열려 있어요.
+      <b>elite.gangnam</b>공휴일에도, 새벽에도, 낮에도 — 언제든 열려 있어요.
       지금 바로 오셔도 됩니다. 방문 전 전화 주시면 현재 가장 좋은
       타이밍을 안내해드려요.
       <span class="tags">#강남24시간 #강남가라오케영업시간 #선릉술집</span>
     </div>
+    <div class="comments">댓글 12개 모두 보기</div>
   </article>
 
-  <!-- 푸터 -->
   <footer>
     <div class="links">
       <a href="guide.html">이용가이드</a>
@@ -395,11 +463,110 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
   <a class="tel" href="tel:010-8145-1911" aria-label="전화 문의">📞</a>
 </div>
 
+<!-- 스토리 뷰어 -->
+<div class="viewer" id="viewer">
+  <div class="v-progress" id="vProgress"></div>
+  <div class="v-head">
+    <div class="pfp"><span>E</span></div>
+    <b>elite.gangnam</b><small id="vLabel"></small>
+    <button class="x" onclick="closeStory()" aria-label="닫기">✕</button>
+  </div>
+  <div class="v-body" id="vBody">
+    <div class="v-tap prev" onclick="stepStory(-1)"></div>
+    <div class="v-tap next" onclick="stepStory(1)"></div>
+  </div>
+</div>
+
 <script>
+// ===== 피드 리빌 =====
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
 }), {threshold:.12});
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// ===== 스토리 데이터 =====
+// 문구 수정은 아래 텍스트만 바꾸면 됩니다.
+const KAKAO = 'https://open.kakao.com/o/sz2MASAi';
+const STORIES = {
+  event: { label: '이벤트', slides: [
+    {type:'text', cls:'st-event', em:'🎉', h:'주대 이벤트<br>준비 중', p:'초저녁 할인, 첫 방문 혜택 —<br>확정되는 대로 여기서 공개할게요.', cta:'제일 먼저 알림 받기'},
+    {type:'text', cls:'st-event', em:'⏰', h:'초저녁이<br>제일 저렴해요', p:'1부(17:00~) 이른 시간대가<br>가장 합리적인 타이밍이에요.', cta:'오늘 타이밍 문의'}
+  ]},
+  photos: { label: '가게사진', slides: [
+    {type:'img', src:'feed_black.jpg'},
+    {type:'img', src:'feed_lounge.jpg'},
+    {type:'img', src:'feed_green.jpg'},
+    {type:'img', src:'feed_cheers.jpg'}
+  ]},
+  staff: { label: '오늘출근', slides: [
+    {type:'text', cls:'st-staff', em:'👥', h:'오늘도<br>정상 출근 완료', p:'매일 수준 높은 매니저들이<br>출근하고 있어요.', cta:'실시간 출근 현황 문의'},
+    {type:'text', cls:'st-staff', em:'✨', h:'오늘의 추천', p:'취향을 말씀해주시면<br>딱 맞게 안내해드려요.', cta:'카톡으로 물어보기'}
+  ]},
+  status: { label: '가게상황', slides: [
+    {type:'text', cls:'st-status', em:'🚪', h:'현재 룸<br>이용 가능', p:'지금 오셔도 대기 없이<br>바로 안내 가능해요.', cta:'실시간 상황 확인'},
+    {type:'text', cls:'st-status', em:'🚗', h:'픽업 대기 중', p:'강남권 어디서든<br>전화 주시면 모시러 갑니다.', cta:'픽업 요청하기'}
+  ]},
+  price: { label: '가격', slides: [
+    {type:'text', cls:'st-price', em:'💰', h:'비용 구성', p:'주대(자리) + TC(매니저) + RT(룸)<br>인원·시간대에 따라 달라져요.', cta:'예상 비용 물어보기'},
+    {type:'text', cls:'st-price', em:'🧾', h:'숨은 비용 없이<br>투명하게', p:'방문 전에 미리 정확한<br>예상 비용을 알려드려요.', cta:'가격 안내 보기', href:'price.html'}
+  ]}
+};
+
+// ===== 스토리 뷰어 =====
+const viewer = document.getElementById('viewer');
+const vBody = document.getElementById('vBody');
+const vProgress = document.getElementById('vProgress');
+const vLabel = document.getElementById('vLabel');
+let cur = null, idx = 0, timer = null;
+
+function openStory(key){
+  cur = STORIES[key]; idx = 0;
+  vLabel.textContent = cur.label;
+  vProgress.innerHTML = cur.slides.map(() => '<i></i>').join('');
+  viewer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  showSlide();
+}
+function closeStory(){
+  viewer.classList.remove('open');
+  document.body.style.overflow = '';
+  clearTimeout(timer); cur = null;
+}
+function stepStory(d){
+  idx += d;
+  if (!cur || idx < 0) { closeStory(); return; }
+  if (idx >= cur.slides.length) { closeStory(); return; }
+  showSlide();
+}
+function showSlide(){
+  clearTimeout(timer);
+  // 진행바
+  [...vProgress.children].forEach((bar, i) => {
+    bar.className = i < idx ? 'done' : (i === idx ? 'now' : '');
+  });
+  // 기존 콘텐츠 제거 (탭 영역은 유지)
+  [...vBody.children].forEach(c => { if (!c.classList.contains('v-tap')) c.remove(); });
+  const s = cur.slides[idx];
+  vBody.classList.remove('st-event','st-staff','st-status','st-price');
+  if (s.type === 'img') {
+    vBody.style.background = '#000';
+    const img = document.createElement('img');
+    img.src = s.src; img.alt = '엘리트 가게 사진';
+    vBody.prepend(img);
+  } else {
+    vBody.style.background = '';
+    vBody.classList.add(s.cls);
+    const div = document.createElement('div');
+    div.className = 'v-text';
+    div.innerHTML = `<span class="em">${s.em}</span><h4>${s.h}</h4><p>${s.p}</p>` +
+      (s.cta ? `<a class="cta" href="${s.href || KAKAO}">${s.cta}</a>` : '');
+    vBody.prepend(div);
+  }
+  timer = setTimeout(() => stepStory(1), 5000);
+}
+// 배경 클래스 초기화 보완
+const _open = openStory;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeStory(); });
 </script>
 </body>
 </html>
