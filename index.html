@@ -230,20 +230,21 @@ img{max-width:100%;display:block}
   filter:brightness(.32) saturate(.95);
 }
 .v-text{
-  position:relative;z-index:2;
+  position:relative;z-index:50;pointer-events:none;
   padding:40px 30px;text-align:center;color:#fff;max-width:420px;
 }
 .v-text .em{font-size:2.6rem;display:block;margin-bottom:20px}
+.v-text .cta{pointer-events:auto}
 .v-text h4{font-size:1.6rem;font-weight:900;line-height:1.4;margin-bottom:14px}
 .v-text p{color:rgba(255,255,255,.8);font-size:.95rem;line-height:1.9}
 .v-text .cta{
   display:inline-block;margin-top:26px;background:#fff;color:#111;
-  font-weight:700;font-size:.9rem;padding:14px 32px;border-radius:99px;
-  position:relative;z-index:20;cursor:pointer;
-  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  font-weight:700;font-size:.95rem;padding:16px 36px;border-radius:99px;
+  position:relative;z-index:60;cursor:pointer;pointer-events:auto;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
 }
 .v-text .cta:active{transform:scale(.96)}
-.v-tap{position:absolute;top:0;bottom:0;width:35%;z-index:5}
+.v-tap{position:absolute;top:0;bottom:30%;width:35%;z-index:5}
 .v-tap.prev{left:0}
 .v-tap.next{right:0;width:65%}
 .st-event{background:linear-gradient(160deg,#1d4ed8,#2563eb 50%,#60a5fa)}
