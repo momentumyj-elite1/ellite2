@@ -1,11 +1,11 @@
 :root {
-  --gold: #6ba3d6;
-  --gold-light: #a8d0ed;
-  --gold-dark: #4a7ba3;
+  --gold: #3b82f6;
+  --gold-light: #60a5fa;
+  --gold-dark: #2563eb;
   --black: #0a0a0a;
-  --dark: #111111;
+  --dark: #121212;
   --dark2: #1a1a1a;
-  --dark3: #222222;
+  --dark3: #262626;
   --text: #e8e4dc;
   --text-muted: #9a9590;
   --white: #f5f0e8;
@@ -36,10 +36,10 @@ nav {
   border-bottom: 1px solid rgba(107,163,214,0.12);
 }
 .nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.3em;
-  color: var(--gold);
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.1rem;
+  letter-spacing: 0.02em;
+  color: var(--white);
   text-decoration: none;
 }
 .nav-links {
@@ -154,7 +154,7 @@ nav {
   background: var(--gold);
 }
 .page-header .section-label {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.5em;
   color: var(--gold);
@@ -184,7 +184,7 @@ nav {
   padding: 5rem 2rem;
 }
 .section-label {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.5em;
   color: var(--gold);
@@ -213,7 +213,7 @@ footer {
   background: var(--dark);
 }
 .footer-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 0.3em;
   color: var(--gold);
