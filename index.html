@@ -238,8 +238,11 @@ img{max-width:100%;display:block}
 .v-text p{color:rgba(255,255,255,.8);font-size:.95rem;line-height:1.9}
 .v-text .cta{
   display:inline-block;margin-top:26px;background:#fff;color:#111;
-  font-weight:700;font-size:.9rem;padding:12px 28px;border-radius:99px;
+  font-weight:700;font-size:.9rem;padding:14px 32px;border-radius:99px;
+  position:relative;z-index:20;cursor:pointer;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
 }
+.v-text .cta:active{transform:scale(.96)}
 .v-tap{position:absolute;top:0;bottom:0;width:35%;z-index:5}
 .v-tap.prev{left:0}
 .v-tap.next{right:0;width:65%}
@@ -682,6 +685,7 @@ function statusSlides(){
 }
 
 const KAKAO = 'https://open.kakao.com/o/sz2MASAi';
+const TEL = 'tel:010-8145-1911';
 function eventSlides(){
   const [b1, b2] = pick(EVENT_POOL, 2);
   return [
@@ -764,8 +768,10 @@ function showSlide(){
     }
     const div = document.createElement('div');
     div.className = 'v-text';
+    // 버튼 링크: href 지정(페이지 이동)이 있으면 그것, 없으면 전부 전화 연결
+    let ctaHref = s.href || TEL;
     div.innerHTML = `<span class="em">${s.em}</span><h4>${s.h}</h4><p>${s.p}</p>` +
-      (s.cta ? `<a class="cta" href="${s.href || KAKAO}">${s.cta}</a>` : '');
+      (s.cta ? `<a class="cta" href="${ctaHref}" onclick="event.stopPropagation();clearTimeout(timer)">${s.cta}</a>` : '');
     vBody.prepend(div);
   }
   timer = setTimeout(() => stepStory(1), 5000);
