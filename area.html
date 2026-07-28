@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강남 지역별 가라오케 비교 | 신사 논현 역삼 선릉</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta name="description" content="신사, 논현, 역삼, 선릉 — 강남 지역별로 상권이 어떻게 다른지 피드로 정리했습니다. 자리 성격에 맞는 지역 고르는 법.">
+<meta property="og:title" content="강남 지역별 가라오케 비교 | 신사 논현 역삼 선릉">
+<meta property="og:description" content="신사, 논현, 역삼, 선릉 — 강남 지역별로 상권이 어떻게 다른지 피드로 정리했습니다. 자리 성격에 맞는 지역 고르는 법.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ellite.co.kr/area.html">
+<meta property="og:image" content="https://ellite.co.kr/feed_black.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ellite.co.kr/area.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000000;
+  --card:#0a0a0a;
+  --line:#262626;
+  --ink:#f5f5f5;
+  --gray:#a8a8a8;
+  --blue:#3b82f6;
+  --blue-soft:#1e3a5f;
+  --heart:#ff4d5e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Noto Sans KR',sans-serif;
+  font-weight:400;
+  line-height:1.7;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.script{font-family:'Great Vibes',cursive;font-weight:400}
+
+/* ===== 폰 프레임 컬럼 ===== */
+.app{
+  max-width:480px;margin:0 auto;
+  background:var(--card);
+  min-height:100vh;
+  border-left:1px solid var(--line);border-right:1px solid var(--line);
+  padding-bottom:86px;
+}
+@media (min-width:520px){
+  body{
+    background:
+      radial-gradient(circle at 15% 20%,rgba(59,130,246,.06),transparent 40%),
+      radial-gradient(circle at 85% 80%,rgba(59,130,246,.05),transparent 40%),
+      var(--bg);
+  }
+}
+
+/* ===== 상단바 ===== */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 18px;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .logo{
+  font-family:'Great Vibes',cursive;
+  font-size:2rem;line-height:1;color:var(--ink);
+  padding-top:4px;display:inline-block;
+}
+.topbar .logo small{
+  font-family:'Noto Sans KR',sans-serif;font-size:.68rem;font-weight:500;
+  color:var(--gray);letter-spacing:.3em;vertical-align:middle;margin-left:8px;
+}
+.topbar a.call{
+  font-size:.82rem;font-weight:700;color:#fff;background:var(--blue);
+  padding:7px 16px;border-radius:8px;transition:.25s;
+}
+.topbar a.call:active{transform:scale(.96)}
+
+/* ===== 프로필 ===== */
+.profile{padding:22px 18px 6px}
+.p-top{display:flex;align-items:center;gap:22px}
+.avatar{
+  width:86px;height:86px;border-radius:50%;flex-shrink:0;
+  background:
+    linear-gradient(#111,#111) padding-box,
+    linear-gradient(45deg,#2563eb,#60a5fa,#93c5fd) border-box;
+  border:3px solid transparent;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:.25s;position:relative;
+}
+.avatar:active{transform:scale(.94)}
+.avatar .e{
+  font-family:'Great Vibes',cursive;font-size:2.6rem;color:#fff;
+  padding-top:6px;
+}
+.avatar .live{
+  position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);
+  background:var(--blue);color:#fff;font-size:.58rem;font-weight:700;
+  letter-spacing:.12em;padding:2px 8px;border-radius:99px;border:2px solid var(--bg);
+}
+.p-stats{display:flex;gap:0;flex:1;justify-content:space-around;text-align:center}
+.p-stats b{display:block;font-size:1.05rem;font-weight:900}
+.p-stats span{font-size:.76rem;color:var(--gray)}
+.p-bio{margin-top:16px;font-size:.92rem}
+.p-bio .name{font-weight:900;font-size:1rem}
+.p-bio .tag{color:var(--blue);font-weight:500}
+.p-btns{display:flex;gap:8px;margin-top:14px}
+.p-btns a{
+  flex:1;text-align:center;padding:9px 0;border-radius:9px;
+  font-size:.88rem;font-weight:700;transition:.25s;
+}
+.p-btns .primary{background:var(--blue);color:#fff}
+.p-btns .primary:active{transform:scale(.97)}
+.p-btns .ghost{background:#1a1a1a;color:var(--ink);border:1px solid var(--line)}
+
+/* ===== 스토리 하이라이트 ===== */
+.stories{
+  display:flex;gap:14px;overflow-x:auto;
+  padding:18px;scrollbar-width:none;
+}
+.stories::-webkit-scrollbar{display:none}
+.story{flex-shrink:0;text-align:center;width:64px;cursor:pointer;background:none;border:none;font-family:inherit}
+.story .ring{
+  width:60px;height:60px;border-radius:50%;
+  background:
+    linear-gradient(#0a0a0a,#0a0a0a) padding-box,
+    linear-gradient(45deg,#2563eb,#93c5fd) border-box;
+  border:2.5px solid transparent;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.45rem;transition:.25s;margin:0 auto;
+}
+.story:active .ring{transform:scale(.92)}
+.story span{display:block;margin-top:6px;font-size:.72rem;color:var(--ink)}
+
+/* ===== 피드 ===== */
+.post{border-top:1px solid var(--line)}
+.post-head{display:flex;align-items:center;gap:11px;padding:12px 16px}
+.post-head .pfp{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  background:#111;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+.post-head .pfp span{font-family:'Great Vibes',cursive;font-size:1.15rem;padding-top:3px}
+.post-head .who b{display:block;font-size:.86rem;font-weight:700;line-height:1.3}
+.post-head .who span{font-size:.74rem;color:var(--gray)}
+.post-img{aspect-ratio:4/5;overflow:hidden;background:#1a1a1a}
+.post-img img{width:100%;height:100%;object-fit:cover}
+
+/* 텍스트 카드형 게시물 */
+.post-card{
+  aspect-ratio:4/5;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:36px;position:relative;overflow:hidden;
+}
+.pc-event{background:linear-gradient(150deg,#1d4ed8,#2563eb 45%,#60a5fa)}
+.pc-notice{background:linear-gradient(150deg,#0f172a,#1e293b 55%,#334155)}
+.post-card .badge{
+  font-size:.72rem;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.85);
+  border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:5px 14px;margin-bottom:22px;
+}
+.post-card h3{
+  color:#fff;font-weight:900;font-size:clamp(1.5rem,7vw,2rem);
+  line-height:1.35;letter-spacing:-.02em;
+}
+.post-card p{color:rgba(255,255,255,.85);font-size:.9rem;margin-top:14px}
+.post-card .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.09)}
+.post-card .d1{width:220px;height:220px;top:-70px;right:-70px}
+.post-card .d2{width:150px;height:150px;bottom:-50px;left:-40px}
+
+.post-actions{display:flex;align-items:center;gap:16px;padding:11px 16px 0;font-size:1.4rem}
+.post-actions .save{margin-left:auto}
+.likes{padding:8px 16px 0;font-size:.86rem;font-weight:700}
+.caption{padding:4px 16px 4px;font-size:.9rem}
+.caption b{font-weight:700;margin-right:6px}
+.caption .more a{color:var(--blue);font-weight:500}
+.caption .tags{display:block;margin-top:6px;color:var(--blue);font-size:.84rem}
+.comments{padding:0 16px 14px;font-size:.84rem;color:var(--gray)}
+
+/* ===== DM 고정바 ===== */
+.dmbar{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:480px;z-index:60;
+  display:flex;gap:10px;align-items:center;
+  padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+  background:rgba(0,0,0,.9);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);
+}
+.dmbar a.msg{
+  flex:1;display:flex;align-items:center;gap:10px;
+  background:#1a1a1a;border:1px solid var(--line);border-radius:99px;padding:11px 18px;
+  color:var(--gray);font-size:.9rem;transition:.25s;
+}
+.dmbar a.msg:active{transform:scale(.98)}
+.dmbar a.tel{
+  width:46px;height:46px;border-radius:50%;flex-shrink:0;
+  background:var(--blue);color:#fff;font-size:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 18px rgba(37,99,235,.35);
+}
+
+/* ===== 푸터 ===== */
+footer{padding:32px 18px 40px;text-align:center;border-top:1px solid var(--line)}
+footer .links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:.84rem;font-weight:500;margin-bottom:16px}
+footer .links a{color:var(--blue)}
+footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+<style>.seo-h1{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "강남 지역별 가라오케 비교 | 신사 논현 역삼 선릉",
+  "description": "신사, 논현, 역삼, 선릉 — 강남 지역별로 상권이 어떻게 다른지 정리했습니다. 자리 성격에 맞는 지역 고르는 법.",
+  "url": "https://ellite.co.kr/area.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "강남 엘리트",
+    "url": "https://ellite.co.kr"
+  },
+  "inLanguage": "ko-KR"
+}
+</script>
+</head>
+<body>
+<h1 class="seo-h1">강남 지역별 가라오케 비교 · 신사 논현 역삼 선릉</h1>
+
+<div class="app">
+
+  <!-- 상단바: 간판 필기체 로고 -->
+  <div class="topbar">
+    <a href="index.html" class="logo">Elite<small>엘리트</small></a>
+    <a class="call" href="tel:010-8145-1911">📞 문의</a>
+  </div>
+
+  <!-- 프로필: 지역별 가이드 소개 -->
+  <section class="profile">
+    <div class="p-top">
+      <div class="avatar"><span class="e">E</span></div>
+      <div class="p-stats">
+        <div><b>24H</b><span>연중무휴</span></div>
+        <div><b>5분</b><span>선릉역 1번출구</span></div>
+        <div><b>무료</b><span>강남권 픽업</span></div>
+      </div>
+    </div>
+    <div class="p-bio">
+      <div class="name">강남 지역별 가이드 · 엘리트</div>
+      같은 강남이라도 지역마다 분위기가 달라요.<br>
+      어디서 1차를 하셨는지에 따라 답이 달라집니다 🍸<br>
+      <span class="tag">#강남가라오케 #신사가라오케 #논현가라오케 #역삼가라오케 #선릉가라오케</span>
+    </div>
+    <div class="p-btns">
+      <a class="primary" href="https://open.kakao.com/o/sz2MASAi">💬 문의하기</a>
+      <a class="ghost" href="price.html">가격 안내</a>
+      <a class="ghost" href="location.html">오시는 길</a>
+    </div>
+  </section>
+
+  <!-- FEED: 지역별 텍스트 카드 -->
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>강남 지역별 가이드</span></div>
+    </div>
+    <div class="post-card pc-notice">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">GUIDE</div>
+      <h3>강남은<br>하나가 아니에요</h3>
+      <p>업계에서는 한강 이남을 통틀어 강남이라고 불러요. 그래서 검색도 대부분 "강남 가라오케"로 하시죠.<br><br>그런데 실제로는 지하철로 몇 정거장씩 떨어져 있고 상권 분위기도 꽤 달라요. 지역 선택이 은근히 중요해요.</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 612개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>신사, 논현, 역삼, 선릉 — 하나씩 짚어드릴게요. 어디가 맞는지는 자리 성격에 따라 달라져요.
+      <span class="tags">#강남가라오케 #강남지역별</span>
+    </div>
+    <div class="comments">댓글 22개 모두 보기</div>
+  </article>
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>신사 · 압구정</span></div>
+    </div>
+    <div class="post-card pc-event">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">신사</div>
+      <h3>밝고 세련된<br>분위기</h3>
+      <p>3호선과 신분당선이 지나는 지역이에요. 가로수길, 압구정이 가까워서 상권 분위기가 밝은 편.<br><br>강북에서 넘어오시면 한남대교 건너 바로 닿아요. 반대로 테헤란로 쪽에서는 좀 거리가 있어요.</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 738개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>압구정이나 가로수길에서 저녁 하셨다면 이쪽이 자연스러워요.
+      <span class="tags">#신사가라오케 #압구정 #가로수길</span>
+    </div>
+    <div class="comments">댓글 31개 모두 보기</div>
+  </article>
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>논현 · 신논현</span></div>
+    </div>
+    <div class="post-card pc-notice">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">논현</div>
+      <h3>강남 한복판</h3>
+      <p>7호선과 9호선이 지나는 지역이에요. 신논현과 강남역 상권이 이어져 있어서 유동 인구가 많고 늦은 시간까지 활발해요.<br><br>어느 방향에서든 접근이 무난한 게 장점. 대신 주말 저녁엔 이동이랑 주차가 좀 번거로워요.</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 549개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>차 가지고 오실 예정이면 이 부분만 감안하세요.
+      <span class="tags">#논현가라오케 #신논현 #강남역</span>
+    </div>
+    <div class="comments">댓글 18개 모두 보기</div>
+  </article>
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>역삼 · 테헤란로</span></div>
+    </div>
+    <div class="post-card pc-event">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">역삼</div>
+      <h3>테헤란로 중심</h3>
+      <p>2호선 역삼역 일대, 테헤란로 한가운데예요. 기업이 밀집해 있어서 평일 저녁 회식이랑 접대 자리가 많은 지역이에요.<br><br>강남역과 선릉역 사이라 양쪽에서 다 접근돼요.</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 803개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>테헤란로에서 저녁 하셨다면 이동 부담이 거의 없어요.
+      <span class="tags">#역삼가라오케 #테헤란로 #강남회식</span>
+    </div>
+    <div class="comments">댓글 40개 모두 보기</div>
+  </article>
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>선릉 · 대치동</span></div>
+    </div>
+    <div class="post-card pc-notice">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">선릉</div>
+      <h3>차분하면서<br>접근성은 확보</h3>
+      <p>2호선과 수인분당선이 만나는 환승역이에요. 대치동과 맞닿아 있고, 테헤란로 동쪽 끝이라 기업 수요는 꾸준하면서 밀집도는 낮은 편.<br><br>강남역이나 논현보다 차분해요. 조용한 대화가 중심인 자리, 접대 자리엔 이쪽이 맞는 경우가 많아요.</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 921개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>저희 엘리트도 여기 있어요. 선릉역 1번 출구 도보 5분.
+      <span class="tags">#선릉가라오케 #선릉하이퍼블릭 #강남접대</span>
+    </div>
+    <div class="comments">댓글 52개 모두 보기</div>
+  </article>
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>고르는 기준</span></div>
+    </div>
+    <div class="post-card pc-event">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">TIP</div>
+      <h3>고르는 기준<br>세 가지</h3>
+      <p>1. 1차 장소에서 가까운 곳<br>이동이 10분 넘어가면 분위기가 끊겨요<br><br>2. 자리 성격<br>띄우는 자리면 번화한 쪽, 대화 중심이면 차분한 쪽<br><br>3. 이동 수단<br>픽업이 되면 지역 선택 폭이 넓어져요</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 674개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>저희는 강남·역삼·논현·신논현·삼성동·선릉·대치동 전역 무료 픽업이라, 어디 계시든 이동은 해결돼요.
+      <span class="tags">#강남무료픽업</span>
+    </div>
+    <div class="comments">댓글 29개 모두 보기</div>
+  </article>
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>문의 안내</span></div>
+    </div>
+    <div class="post-card pc-notice">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">ASK</div>
+      <h3>결정이<br>어려우시면</h3>
+      <p>지역이랑 업소를 동시에 고르려고 하면 오히려 결정이 어려워져요. 인원, 예산, 자리 성격을 먼저 정하시고 물어보시는 게 빨라요.<br><br>1차 장소랑 인원, 예상 시간만 알려주시면 방향 잡아드릴게요. 저희가 안 맞는 자리면 그렇게 말씀드립니다.</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 455개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>편하게 물어보세요. 방문 안 하셔도 괜찮아요 🙂
+      <span class="more"><a href="guide.html">이용가이드</a> · <a href="blog.html">블로그</a>도 참고하세요 →</span>
+      <span class="tags">#강남가라오케문의</span>
+    </div>
+    <div class="comments">댓글 15개 모두 보기</div>
+  </article>
+
+  <footer>
+    <div class="links">
+      <a href="guide.html">이용가이드</a>
+      <a href="price.html">가격안내</a>
+      <a href="blog.html">블로그</a>
+      <a href="location.html">오시는 길</a>
+    </div>
+    <p>
+      강남 엘리트 하이퍼블릭 · 선릉역 1번 출구 도보 5분<br>
+      강남권 전역 무료 픽업 · 문의 010-8145-1911<br>
+      <a href="https://ellite-gangnam.com" style="color:var(--blue);text-decoration:underline;text-underline-offset:3px">엘리트 공식 안내 홈페이지 →</a><br>
+      © 2025 ELLITE. All rights reserved.
+    </p>
+  </footer>
+
+</div>
+
+<!-- DM 고정바 -->
+<div class="dmbar">
+  <a class="msg" href="https://open.kakao.com/o/sz2MASAi">💬 메시지 보내기...</a>
+  <a class="tel" href="tel:010-8145-1911" aria-label="전화 문의">📞</a>
+</div>
+
+<script>
+// ===== 피드 리빌 =====
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
