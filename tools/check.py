@@ -4,6 +4,8 @@
 사이트 점검 스크립트 (표준 라이브러리만 사용)
 - 이 파일이 있는 tools/ 폴더의 상위 폴더에 있는 모든 .html 파일을 검사합니다.
 - 사용법:  python tools/check.py
+- 실행할 때마다 결과를 data/checks/YYYY-MM-DD.json 으로 저장합니다.
+  (화면 출력은 그대로 유지, 같은 날 다시 실행하면 덮어씁니다.)
 """
 
 import os
@@ -11,12 +13,15 @@ import re
 import sys
 import json
 import glob
+import datetime
 
 # ── 설정 ────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://ellite.co.kr"
 # 이 사이트의 대표 전화번호
 SITE_PHONE = "010-8145-1911"
+# 사이트 이름 (폴더 이름을 사용)
+SITE_NAME = os.path.basename(BASE_DIR)
 
 # 금지 문구
 FORBIDDEN = [
@@ -78,8 +83,16 @@ def main():
     docs = {f: read(os.path.join(BASE_DIR, f)) for f in html_files}
     problems = 0
 
+    # 항목별 문제 기록 (JSON 저장용)
+    recs = {i: [] for i in range(1, 11)}
+    section_titles = {}
+
     def head(n, title):
+        section_titles[n] = title
         print("\n[%d] %s" % (n, title))
+
+    def record(n, file, detail):
+        recs[n].append({"file": file, "detail": detail})
 
     # 1) 금지 문구
     head(1, "금지 문구")
@@ -89,7 +102,9 @@ def main():
             if ph in docs[f]:
                 found = True
                 problems += 1
-                print("  - %s : \"%s\"  →  …%s…" % (f, ph, sentence_of(docs[f], ph)))
+                sent = sentence_of(docs[f], ph)
+                print("  - %s : \"%s\"  →  …%s…" % (f, ph, sent))
+                record(1, f, "\"%s\" → %s" % (ph, sent))
     if not found:
         print("  문제 없음")
 
@@ -102,6 +117,7 @@ def main():
                 found = True
                 problems += 1
                 print("  - %s : %s" % (f, num))
+                record(2, f, num)
     if not found:
         print("  문제 없음")
 
@@ -113,15 +129,18 @@ def main():
         if not can:
             found = True; problems += 1
             print("  - %s : canonical 태그 없음" % f)
+            record(3, f, "canonical 태그 없음")
             continue
         if f in CANONICAL_EXCEPTIONS:
             if can != CANONICAL_EXCEPTIONS[f]:
                 found = True; problems += 1
                 print("  - %s : 예외 등록값과 다름 (%s)" % (f, can))
+                record(3, f, "예외 등록값과 다름 (%s)" % can)
             continue
         if loc_to_filename(can) != f:
             found = True; problems += 1
             print("  - %s : canonical=%s (자기 파일명과 다름)" % (f, can))
+            record(3, f, "canonical=%s (자기 파일명과 다름)" % can)
     if not found:
         print("  문제 없음")
 
@@ -134,6 +153,7 @@ def main():
         if og is not None and tw is not None and og != tw:
             found = True; problems += 1
             print("  - %s : og=%s / twitter=%s" % (f, og, tw))
+            record(4, f, "og=%s / twitter=%s" % (og, tw))
     if not found:
         print("  문제 없음")
 
@@ -152,6 +172,7 @@ def main():
         if missing:
             found = True; problems += 1
             print("  - %s : %s" % (f, ", ".join(missing)))
+            record(5, f, ", ".join(missing))
     if not found:
         print("  문제 없음")
 
@@ -167,6 +188,7 @@ def main():
         if len(fs) > 1:
             found = True; problems += 1
             print("  - \"%s\" : %s" % (t, ", ".join(fs)))
+            record(6, ", ".join(fs), "중복 title: \"%s\"" % t)
     if not found:
         print("  문제 없음")
 
@@ -180,6 +202,7 @@ def main():
             except Exception as e:
                 found = True; problems += 1
                 print("  - %s : %s" % (f, e))
+                record(7, f, str(e))
     if not found:
         print("  문제 없음")
 
@@ -192,7 +215,9 @@ def main():
             if m is None or m.group(1).strip() == "":
                 found = True; problems += 1
                 src = re.search(r'\bsrc=["\']([^"\']*)["\']', tag)
-                print("  - %s : %s" % (f, src.group(1) if src else tag[:60]))
+                detail = src.group(1) if src else tag[:60]
+                print("  - %s : %s" % (f, detail))
+                record(8, f, detail)
     if not found:
         print("  문제 없음")
 
@@ -210,6 +235,7 @@ def main():
                 seen.add(target)
                 found = True; problems += 1
                 print("  - %s → %s (파일 없음)" % (f, target))
+                record(9, f, "%s (파일 없음)" % target)
     if not found:
         print("  문제 없음")
 
@@ -219,6 +245,7 @@ def main():
     if not os.path.exists(sm_path):
         problems += 1
         print("  - sitemap.xml 파일이 없습니다")
+        record(10, "sitemap.xml", "파일이 없습니다")
     else:
         sm = read(sm_path)
         sm_files = set(loc_to_filename(u) for u in re.findall(r"<loc>([^<]+)</loc>", sm))
@@ -230,13 +257,40 @@ def main():
         for f in missing_in_sm:
             problems += 1
             print("  - sitemap 에 빠짐: %s" % f)
+            record(10, f, "sitemap 에 빠짐")
         for f in missing_files:
             problems += 1
             print("  - sitemap 에 있으나 파일 없음: %s" % f)
+            record(10, f, "sitemap 에 있으나 파일 없음")
 
     print("\n" + "=" * 40)
     print("검사한 html 파일: %d개" % len(html_files))
     print("발견된 문제: %d건" % problems)
+
+    # ── 결과 저장 (data/checks/YYYY-MM-DD.json) ──────────────
+    today = datetime.date.today().isoformat()
+    checks_dir = os.path.join(BASE_DIR, "data", "checks")
+    os.makedirs(checks_dir, exist_ok=True)
+    result = {
+        "date": today,
+        "site": SITE_NAME,
+        "html_count": len(html_files),
+        "total_problems": problems,
+        "sections": [
+            {
+                "no": n,
+                "title": section_titles.get(n, ""),
+                "count": len(recs[n]),
+                "problems": recs[n],
+            }
+            for n in range(1, 11)
+        ],
+    }
+    save_path = os.path.join(checks_dir, today + ".json")
+    with open(save_path, "w", encoding="utf-8") as fp:
+        json.dump(result, fp, ensure_ascii=False, indent=2)
+    print("결과 저장: %s" % os.path.relpath(save_path, BASE_DIR))
+
     return 1 if problems else 0
 
 

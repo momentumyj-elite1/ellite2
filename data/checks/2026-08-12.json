@@ -1,0 +1,68 @@
+{
+  "date": "2026-08-12",
+  "site": "ellite2",
+  "html_count": 7,
+  "total_problems": 0,
+  "sections": [
+    {
+      "no": 1,
+      "title": "금지 문구",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 2,
+      "title": "전화번호 (010-8145-1911 이 아닌 번호)",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 3,
+      "title": "canonical 불일치",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 4,
+      "title": "og:image 와 twitter:image 불일치",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 5,
+      "title": "필수 메타 태그 누락",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 6,
+      "title": "title 중복",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 7,
+      "title": "JSON-LD 파싱 오류",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 8,
+      "title": "img alt 누락/빈값",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 9,
+      "title": "깨진 내부 링크 (같은 폴더 html)",
+      "count": 0,
+      "problems": []
+    },
+    {
+      "no": 10,
+      "title": "sitemap.xml 대조",
+      "count": 0,
+      "problems": []
+    }
+  ]
+}
