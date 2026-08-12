@@ -1,0 +1,15 @@
+{
+  "date": "2026-08-12",
+  "site": "ellite2",
+  "items": [
+    {
+      "title": "data/gsc/ 에 서치콘솔 CSV 넣기",
+      "why": "순위·클릭 데이터가 있어야 개선 우선순위를 자동으로 뽑을 수 있음",
+      "evidence": "현재 GSC 데이터 0건",
+      "target_file": null,
+      "check": {
+        "method": "manual"
+      }
+    }
+  ]
+}
