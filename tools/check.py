@@ -14,8 +14,9 @@ import glob
 
 # ── 설정 ────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOMAIN = "https://ellite-gangnam.com"
-PHONE = "010-8145-1911"
+DOMAIN = "https://ellite.co.kr"
+# 이 사이트의 대표 전화번호
+SITE_PHONE = "010-8145-1911"
 
 # 금지 문구
 FORBIDDEN = [
@@ -93,11 +94,11 @@ def main():
         print("  문제 없음")
 
     # 2) 전화번호
-    head(2, "전화번호 (010-8145-1911 이 아닌 번호)")
+    head(2, "전화번호 (%s 이 아닌 번호)" % SITE_PHONE)
     found = False
     for f in html_files:
         for num in sorted(set(PHONE_RE.findall(docs[f]))):
-            if num != PHONE:
+            if num != SITE_PHONE:
                 found = True
                 problems += 1
                 print("  - %s : %s" % (f, num))
