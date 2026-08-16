@@ -215,26 +215,58 @@ def score_todo(item):
     return "manual"
 
 
-def effect_of(target_file, cur_pages, prev_pages):
-    """완료 항목의 효과 판정 (노출 기준)."""
-    if not target_file or not cur_pages or not prev_pages:
+def effect_of(item, cur_pages):
+    """완료 항목의 효과 판정 — 저장해 둔 '당시' 노출을 기준으로 현재와 비교."""
+    tf = item.get("target_file")
+    base = item.get("impressions")
+    if not tf or base is None or not cur_pages:
         return "데이터 없음", None
-    cm = cur_pages.get(target_file)
-    pm = prev_pages.get(target_file)
-    if not cm or not pm:
+    cm = cur_pages.get(tf)
+    if not cm:
         return "데이터 없음", None
-    delta = cm["impr"] - pm["impr"]
-    detail = "노출 %d → %d, 클릭 %d → %d, 순위 %.1f → %.1f" % (
-        int(pm["impr"]), int(cm["impr"]), int(pm["clicks"]), int(cm["clicks"]),
-        pm["pos"], cm["pos"])
-    if delta > 0:
+    b_clicks = item.get("clicks")
+    b_pos = item.get("position")
+    detail = "노출 %d → %d, 클릭 %s → %d, 순위 %s → %.1f" % (
+        int(base), int(cm["impr"]),
+        (str(int(b_clicks)) if b_clicks is not None else "-"), int(cm["clicks"]),
+        (("%.1f" % b_pos) if b_pos is not None else "-"), cm["pos"])
+    if cm["impr"] > base:
         return "효과 있음", detail
-    if delta < 0:
+    if cm["impr"] < base:
         return "재검토 필요", detail
     return "지켜보는 중", detail
 
 
+def how_to_check(check):
+    """확인 방법을 사람이 읽을 수 있는 한 줄로."""
+    m = (check or {}).get("method")
+    if m == "contains":
+        s = check.get("string", "")
+        if check.get("expect") == "absent":
+            return "대상 파일에서 '%s' 문자열이 사라졌으면 완료" % s
+        return "대상 파일에 '%s' 문자열이 들어갔으면 완료" % s
+    if m == "title_changed":
+        return "대상 파일의 <title> 이 이전과 달라졌으면 완료"
+    return "자동 판별 불가 — 수동 확인"
+
+
 # ── 다음 2주 할 일 자동 추출 ─────────────────────────────
+def make_todo(title, why, evidence, target_file, check,
+              impressions=None, clicks=None, position=None):
+    """할 일 1건을 표준 형태로. 노출·클릭·순위와 확인 방법을 함께 기록."""
+    return {
+        "title": title,                 # 무엇을 해야 하는지
+        "target_file": target_file,     # 대상 파일명
+        "why": why,                     # 왜 필요한지 (한 줄)
+        "evidence": evidence,           # 화면 표시용 근거 문구
+        "impressions": impressions,     # 당시 노출수
+        "clicks": clicks,               # 당시 클릭수
+        "position": position,           # 당시 평균 순위
+        "check": check,                 # 확인 방법 (자동 채점용)
+        "how_to_check": how_to_check(check),  # 확인 방법 (사람이 읽는 설명)
+    }
+
+
 def build_todos(cur_problems, cur_q, cur_p, prev_p, has_gsc):
     todos = []
 
@@ -244,13 +276,11 @@ def build_todos(cur_problems, cur_q, cur_p, prev_p, has_gsc):
             m = re.search(r'"([^"]+)"', detail or "")
             phrase = m.group(1) if m else None
             if f and phrase:
-                todos.append({
-                    "title": "%s 에서 금지 문구 '%s' 제거" % (f, phrase),
-                    "why": "과장·금지 문구는 신뢰도와 노출에 악영향",
-                    "evidence": "점검 1번 지적",
-                    "target_file": f,
-                    "check": {"method": "contains", "string": phrase, "expect": "absent"},
-                })
+                todos.append(make_todo(
+                    "%s 에서 금지 문구 '%s' 제거" % (f, phrase),
+                    "과장·금지 문구는 신뢰도와 노출에 악영향",
+                    "점검 1번 지적", f,
+                    {"method": "contains", "string": phrase, "expect": "absent"}))
                 continue
         if no == 5:  # 필수 메타 누락
             tag = (detail or "").split(",")[0].strip()
@@ -260,43 +290,38 @@ def build_todos(cur_problems, cur_q, cur_p, prev_p, has_gsc):
                       "og:image": 'property="og:image"'}
             needle = tagmap.get(tag)
             if f and needle:
-                todos.append({
-                    "title": "%s 메타 태그 보완 (%s)" % (f, detail),
-                    "why": "필수 메타가 없으면 검색결과 노출·클릭이 떨어짐",
-                    "evidence": "점검 5번 지적",
-                    "target_file": f,
-                    "check": {"method": "contains", "string": needle, "expect": "present"},
-                })
+                todos.append(make_todo(
+                    "%s 메타 태그 보완 (%s)" % (f, detail),
+                    "필수 메타가 없으면 검색결과 노출·클릭이 떨어짐",
+                    "점검 5번 지적", f,
+                    {"method": "contains", "string": needle, "expect": "present"}))
                 continue
-        todos.append({
-            "title": "%s : %s 처리" % (f, detail),
-            "why": "점검에서 발견된 문제 — 방치 시 품질·노출 저하",
-            "evidence": "점검 %d번 지적" % (no or 0),
-            "target_file": f,
-            "check": {"method": "manual"},
-        })
+        todos.append(make_todo(
+            "%s : %s 처리" % (f, detail),
+            "점검에서 발견된 문제 — 방치 시 품질·노출 저하",
+            "점검 %d번 지적" % (no or 0), f, {"method": "manual"}))
 
     # 우선순위 2: 노출 20+ 인데 클릭 0 페이지 → 제목·설명 개선
     for fn, m in sorted(cur_p.items(), key=lambda kv: -kv[1]["impr"]):
         if m["impr"] >= 20 and m["clicks"] == 0:
-            todos.append({
-                "title": "%s 제목·설명 개선" % fn,
-                "why": "노출은 있는데 클릭이 없음 — 제목/메타가 검색 의도와 안 맞을 가능성",
-                "evidence": "노출 %d, 클릭 0" % int(m["impr"]),
-                "target_file": fn,
-                "check": {"method": "title_changed", "baseline": page_title(fn) or ""},
-            })
+            todos.append(make_todo(
+                "%s 제목·설명 개선" % fn,
+                "노출은 있는데 클릭이 없음 — 제목/메타가 검색 의도와 안 맞을 가능성",
+                "노출 %d, 클릭 0" % int(m["impr"]), fn,
+                {"method": "title_changed", "baseline": page_title(fn) or ""},
+                impressions=int(m["impr"]), clicks=int(m["clicks"]),
+                position=round(m["pos"], 1)))
 
     # 우선순위 3: 순위 11~20위 검색어 → 1페이지 진입
     for q, m in sorted(cur_q.items(), key=lambda kv: kv[1]["pos"]):
         if 10 < m["pos"] <= 20:
-            todos.append({
-                "title": "'%s' 검색어 강화" % q,
-                "why": "11~20위 — 조금만 개선하면 1페이지(10위 이내) 진입 가능",
-                "evidence": "순위 %.1f, 노출 %d" % (m["pos"], int(m["impr"])),
-                "target_file": None,
-                "check": {"method": "manual"},
-            })
+            todos.append(make_todo(
+                "'%s' 검색어 강화" % q,
+                "11~20위 — 조금만 개선하면 1페이지(10위 이내) 진입 가능",
+                "순위 %.1f, 노출 %d" % (m["pos"], int(m["impr"])), None,
+                {"method": "manual"},
+                impressions=int(m["impr"]), clicks=int(m["clicks"]),
+                position=round(m["pos"], 1)))
 
     # 우선순위 4: 노출 30% 이상 감소 페이지
     for fn, cm in cur_p.items():
@@ -304,23 +329,20 @@ def build_todos(cur_problems, cur_q, cur_p, prev_p, has_gsc):
         if pm and pm["impr"] > 0:
             drop = (pm["impr"] - cm["impr"]) / pm["impr"]
             if drop >= 0.30:
-                todos.append({
-                    "title": "%s 노출 급감 원인 점검" % fn,
-                    "why": "노출이 크게 줄면 색인·콘텐츠·경쟁 변화 신호",
-                    "evidence": "노출 %d → %d (-%d%%)" % (int(pm["impr"]), int(cm["impr"]), int(drop * 100)),
-                    "target_file": fn,
-                    "check": {"method": "title_changed", "baseline": page_title(fn) or ""},
-                })
+                todos.append(make_todo(
+                    "%s 노출 급감 원인 점검" % fn,
+                    "노출이 크게 줄면 색인·콘텐츠·경쟁 변화 신호",
+                    "노출 %d → %d (-%d%%)" % (int(pm["impr"]), int(cm["impr"]), int(drop * 100)),
+                    fn, {"method": "title_changed", "baseline": page_title(fn) or ""},
+                    impressions=int(cm["impr"]), clicks=int(cm["clicks"]),
+                    position=round(cm["pos"], 1)))
 
     # 데이터가 없어 아무것도 못 뽑은 경우: 데이터 확보를 첫 할 일로
     if not todos and not has_gsc:
-        todos.append({
-            "title": "data/gsc/ 에 서치콘솔 CSV 넣기",
-            "why": "순위·클릭 데이터가 있어야 개선 우선순위를 자동으로 뽑을 수 있음",
-            "evidence": "현재 GSC 데이터 0건",
-            "target_file": None,
-            "check": {"method": "manual"},
-        })
+        todos.append(make_todo(
+            "data/gsc/ 에 서치콘솔 CSV 넣기",
+            "순위·클릭 데이터가 있어야 개선 우선순위를 자동으로 뽑을 수 있음",
+            "현재 GSC 데이터 0건", None, {"method": "manual"}))
 
     return todos[:5]
 
@@ -482,7 +504,7 @@ def h_prev_actions(prev_todos, cur_p, prev_p):
         st = score_todo(it)
         title = esc(it.get("title"))
         if st == "done":
-            label, detail = effect_of(it.get("target_file"), cur_p, prev_p)
+            label, detail = effect_of(it, cur_p)
             cls = {"효과 있음": "tag", "지켜보는 중": "tag mid",
                    "재검토 필요": "tag strong", "데이터 없음": "tag weak"}.get(label, "tag weak")
             done_rows.append(
