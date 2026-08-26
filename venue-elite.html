@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>선릉 엘리트 | 리모델링·견적 계산기</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="선릉 엘리트 안내. 최근 리모델링한 52개 룸, 1부·2부 주대와 TC 단가, 견적을 미리 보는 계산기까지 정리했습니다.">
+<link rel="canonical" href="https://ellite.co.kr/venue-elite.html">
+<meta property="og:title" content="선릉 엘리트 | 리모델링·견적 계산기">
+<meta property="og:description" content="선릉 엘리트 안내. 최근 리모델링한 52개 룸, 1부·2부 주대와 TC 단가, 견적을 미리 보는 계산기까지 정리했습니다.">
+<meta property="og:image" content="https://ellite.co.kr/feed_black.jpg">
+<meta name="twitter:image" content="https://ellite.co.kr/feed_black.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .lead{font-size:.95rem;color:var(--text-muted);line-height:2.1;max-width:760px;margin:0 auto}
+  .block{margin:3.2rem auto 0;max-width:900px}
+  h2.st{font-family:'Noto Serif KR',serif;color:var(--white);font-size:1.18rem;margin:0 0 .4rem}
+  .block>p{font-size:.87rem;color:var(--text-muted);line-height:2.05}
+  .spec{width:100%;border-collapse:collapse;margin-top:1.3rem;font-size:.86rem}
+  .spec th,.spec td{border:1px solid rgba(107,163,214,.18);padding:.8rem 1rem;text-align:left;color:var(--text-muted);vertical-align:top}
+  .spec th{color:#cdd8e6;background:rgba(107,163,214,.06);white-space:nowrap;width:32%}
+  .cmp-scroll{overflow-x:auto;margin-top:1.6rem}
+  .cmp{width:100%;border-collapse:collapse;font-size:.8rem;min-width:760px}
+  .cmp th,.cmp td{border:1px solid rgba(107,163,214,.18);padding:.7rem .8rem;text-align:left;color:var(--text-muted);vertical-align:top}
+  .cmp thead th{color:#cdd8e6;background:rgba(107,163,214,.08);position:sticky;top:0}
+  .cmp td.name a{color:var(--gold);text-decoration:none;font-weight:500}
+  .fitlist{list-style:none;padding:0;margin:1.3rem 0 0;display:flex;flex-direction:column;gap:1px;background:rgba(107,163,214,.15)}
+  .fitlist li{background:var(--dark2);padding:1.1rem 1.4rem;font-size:.86rem;color:var(--text-muted);line-height:1.9}
+  .fitlist li b{color:#e8dcc4;font-weight:500}
+  .faq2{margin-top:1.3rem;display:flex;flex-direction:column;gap:1px;background:rgba(107,163,214,.15)}
+  .faq2 .i{background:var(--dark2);padding:1.3rem 1.5rem}
+  .faq2 .q{color:var(--gold);font-size:.9rem;margin-bottom:.5rem}
+  .faq2 .a{color:var(--text-muted);font-size:.84rem;line-height:1.95}
+  .route{list-style:none;padding:0;margin:1.3rem 0 0;display:flex;flex-direction:column;gap:1px;background:rgba(107,163,214,.15)}
+  .route li{background:var(--dark2);padding:1.2rem 1.4rem;font-size:.87rem;color:var(--text-muted);line-height:1.95}
+  .route .cond{color:#e8dcc4;font-weight:500}
+  .route a{color:var(--gold);text-decoration:none}
+  .small{font-size:.8rem;color:var(--text-muted);line-height:1.9;margin-top:1rem}
+  .cta-box{border:1px solid rgba(107,163,214,.2);padding:2.6rem 2rem;text-align:center;margin:3.4rem auto 0;max-width:900px}
+  .cta-title{font-family:'Noto Serif KR',serif;font-size:1.3rem;color:var(--white);margin-bottom:.7rem}
+  .cta-desc{font-size:.85rem;color:var(--text-muted);margin-bottom:1.8rem;line-height:2}
+  .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-gold{background:var(--gold);color:#fff;padding:.9rem 2.3rem;text-decoration:none;font-size:.8rem;letter-spacing:.15em}
+  .btn-outline{border:1px solid var(--gold);color:var(--gold);padding:.9rem 2.3rem;text-decoration:none;font-size:.8rem;letter-spacing:.15em}
+  @media(max-width:768px){.spec th{width:38%}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Elite</a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="venues.html">업소 안내</a></li>
+    <li><a href="how-to-choose.html">어디가 맞을까</a></li>
+    <li><a href="price.html">가격안내</a></li>
+    <li><a href="guide.html">이용가이드</a></li>
+    <li><a href="area.html">지역가이드</a></li>
+    <li><a href="blog.html">블로그</a></li>
+    <li><a href="location.html">오시는 길</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:010-8145-1911" class="nav-tel">📞 무료 상담</a>
+    <button class="nav-hamburger" onclick="toggleDrawer(this)"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html">홈</a>
+  <a href="venues.html">업소 안내</a>
+  <a href="how-to-choose.html">어디가 맞을까</a>
+  <a href="price.html">가격안내</a>
+  <a href="guide.html">이용가이드</a>
+  <a href="area.html">지역가이드</a>
+  <a href="blog.html">블로그</a>
+  <a href="location.html">오시는 길</a>
+  <a href="tel:010-8145-1911" class="drawer-tel">📞 010-8145-1911</a>
+</div>
+
+<div class="page-header">
+  <span class="section-label">SEOLLEUNG · ELITE</span>
+  <h1>엘리트</h1>
+  <p>리모델링을 마친 선릉 자리, 견적을 미리 확인하고 오세요.</p>
+</div>
+
+<div class="page-content">
+  <span class="section-label">SEOLLEUNG · ELITE</span>
+  <h2 class="section-title">엘리트</h2>
+  <div class="section-divider"></div>
+  <p class="lead">선릉에서 가장 최근에 손을 본 자리입니다. 리모델링을 마쳐 룸과 시설이 새것에 가깝고, 오시기 전에 대략의 견적을 직접 계산해볼 수 있다는 점이 다른 곳과 다릅니다. 깔끔한 공간에서 부담 없이 즐기고 싶은 분께 잘 맞습니다.</p>
+
+  <div class="block">
+    <h2 class="st">위치와 가는 법</h2>
+    <p>선릉 일대에 있습니다. 정확한 위치는 예약하실 때 안내해 드리고, 강남권이라면 이동도 어렵지 않습니다. 처음이시면 전화 한 통 주시면 길을 바로 잡아드립니다.</p>
+  </div>
+
+  <div class="block">
+    <h2 class="st">가격</h2>
+    <table class="spec">
+      <tr><th>주대</th><td>1부 10만 원 / 2부 11만 원</td></tr>
+      <tr><th>TC(매니저)</th><td>1부 13만 원 / 2부 14만 원</td></tr>
+      <tr><th>룸 이용료</th><td>5만 원</td></tr>
+      <tr><th>1부·2부 기준</th><td>입실하신 시각으로 나뉩니다. 평일과 금요일은 새벽 1시, 토·일요일은 자정이 경계입니다. 그 전에 들어오시면 1부, 이후면 2부입니다.</td></tr>
+    </table>
+    <p class="small">※ 항목별 단가만 적었습니다. 총액은 인원·시간·병수에 따라 달라집니다. 미리 가늠해 보고 싶으시면 <a href="https://ellite-gangnam.com/cost-calculator.html" target="_blank" style="color:var(--gold);text-decoration:none">견적 계산기</a>로 조건을 넣어 확인하실 수 있습니다.</p>
+  </div>
+
+  <div class="block">
+    <h2 class="st">공간</h2>
+    <p>룸은 52개입니다. 큰 방은 손님 기준 10명까지, 매니저를 포함하면 20명까지 앉습니다. 리모델링으로 인테리어를 새로 했고, 남성용 소변기는 룸 안에 있어 자리를 오래 비우지 않아도 됩니다. 여성 화장실은 룸 밖에 따로 마련되어 있습니다.</p>
+  </div>
+
+  <div class="block">
+    <h2 class="st">이런 자리에 맞습니다</h2>
+    <ul class="fitlist">
+      <li><b>술을 적게, 짧게</b> 즐길 자리. 주대가 낮은 편이라 가볍게 보기 좋습니다.</li>
+      <li><b>견적을 미리 알고</b> 움직이고 싶은 자리. 계산기로 조건을 넣어 대략을 잡아볼 수 있습니다.</li>
+      <li><b>새 시설</b>을 원하는 자리. 최근 손봐서 룸 상태가 깔끔합니다.</li>
+      <li><b>선릉에서 만나는</b> 자리. 이동 부담이 적습니다.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2 class="st">자주 묻는 것</h2>
+    <div class="faq2">
+      <div class="i"><p class="q">Q. 1부와 2부는 뭐가 다른가요?</p><p class="a">주대와 TC 금액이 다릅니다. 들어오신 시각으로 정해지며, 이른 시간대인 1부가 조금 더 낮습니다.</p></div>
+      <div class="i"><p class="q">Q. 미리 얼마 나올지 볼 수 있나요?</p><p class="a">계산기에 요일·시간·인원·이용 시간을 넣으면 항목별로 확인됩니다. 정확한 안내는 방문 인원과 시간을 알려주시면 맞춰 드립니다.</p></div>
+      <div class="i"><p class="q">Q. 화장실이 룸 안에 있나요?</p><p class="a">남성 소변기는 룸 안에 있습니다. 여성 화장실은 룸 밖에 따로 있습니다.</p></div>
+    </div>
+  </div>
+  <div class="cta-box">
+    <p class="cta-title">엘리트 자리 문의</p>
+    <p class="cta-desc">리모델링한 선릉 자리, 인원과 시간만 알려주시면 잡아드립니다. 담당 영준에게 편하게 남겨 주세요.</p>
+    <div class="cta-btns">
+      <a href="tel:010-8145-1911" class="btn-gold">📞 전화 문의</a>
+      <a href="https://open.kakao.com/o/sz2MASAi" target="_blank" class="btn-outline">💬 오픈채팅</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">HUB</span>
+  <a href="tel:010-8145-1911" class="footer-tel">010-8145-1911</a>
+  <p class="footer-info">담당 영준 · 선릉 엘리트 · 선릉 도파민 · 신사 유앤미 · 삼성동 달토<br>© 2026 GANGNAM VENUE HUB. All rights reserved.</p>
+</footer>
+<div class="float-cta">
+  <a href="tel:010-8145-1911" class="float-btn float-btn-tel">📞</a>
+  <a href="https://open.kakao.com/o/sz2MASAi" class="float-btn float-btn-kakao" target="_blank">💬</a>
+</div>
+<script>
+function toggleDrawer(btn){btn.classList.toggle('open');document.getElementById('navDrawer').classList.toggle('open');}
+</script>
+</body>
+</html>
