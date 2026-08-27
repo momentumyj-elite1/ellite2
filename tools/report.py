@@ -301,16 +301,25 @@ def build_todos(cur_problems, cur_q, cur_p, prev_p, has_gsc):
             "점검에서 발견된 문제 — 방치 시 품질·노출 저하",
             "점검 %d번 지적" % (no or 0), f, {"method": "manual"}))
 
-    # 우선순위 2: 노출 20+ 인데 클릭 0 페이지 → 제목·설명 개선
+    # 우선순위 2: 노출 20+ 클릭 0 페이지 → 순위 구간별로 판정
+    #   1~10위=제목·설명 문제 / 11~30위=순위 올리기 / 31위+=판단 불가(제외)
     for fn, m in sorted(cur_p.items(), key=lambda kv: -kv[1]["impr"]):
         if m["impr"] >= 20 and m["clicks"] == 0:
+            pos = m["pos"]
+            if pos <= 10:
+                t_title = "%s 제목·설명 개선" % fn
+                t_why = "1~10위인데 클릭 0 — 제목/설명이 클릭을 못 만듦 (고치면 바로 효과)"
+            elif pos <= 30:
+                t_title = "%s 순위 올리기 (콘텐츠 보강)" % fn
+                t_why = "노출은 있으나 순위 11~30위라 클릭이 안 나옴 — 순위부터 올려야 함"
+            else:
+                continue  # 31위 이상은 순위가 낮아 판단 불가 → 제외
             todos.append(make_todo(
-                "%s 제목·설명 개선" % fn,
-                "노출은 있는데 클릭이 없음 — 제목/메타가 검색 의도와 안 맞을 가능성",
-                "노출 %d, 클릭 0" % int(m["impr"]), fn,
+                t_title, t_why,
+                "노출 %d · 클릭 0 · 순위 %.1f" % (int(m["impr"]), pos), fn,
                 {"method": "title_changed", "baseline": page_title(fn) or ""},
                 impressions=int(m["impr"]), clicks=int(m["clicks"]),
-                position=round(m["pos"], 1)))
+                position=round(pos, 1)))
 
     # 우선순위 3: 순위 11~20위 검색어 → 1페이지 진입
     for q, m in sorted(cur_q.items(), key=lambda kv: kv[1]["pos"]):
@@ -453,34 +462,46 @@ def md_section_search(q_rounds, p_rounds):
 
 # ── 프린트용 요약본 HTML ─────────────────────────────────
 CSS = """
-@page { size: A4; margin: 11mm; }
+@page { size: A4 portrait; margin: 12mm 10mm; }
+@media print { @page { @top-right { content: "p." counter(page) " / " counter(pages); font-size: 8pt; color: #777; } } }
 * { box-sizing: border-box; }
 body { font-family: 'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
-       font-size: 10px; line-height: 1.4; color: #000; margin: 0; }
-h1 { font-size: 15px; margin: 0 0 2px; }
-h1 .date { font-weight: normal; color: #555; font-size: 11px; }
-.sub { color: #555; font-size: 9px; margin-bottom: 6px; }
-h2 { font-size: 11px; margin: 9px 0 3px; padding-bottom: 2px;
-     border-bottom: 1.5px solid #000; }
-p { margin: 2px 0; }
-ul { margin: 2px 0 4px; padding-left: 15px; }
-li { margin: 1px 0; }
-.why { color: #444; font-size: 9px; }
-table { width: 100%; border-collapse: collapse; margin: 2px 0 4px; }
-th, td { border: 1px solid #999; padding: 2px 4px; text-align: left; vertical-align: top; }
-th { background: #e6e6e6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-.num { text-align: right; white-space: nowrap; }
-.tag { display: inline-block; padding: 0 4px; font-size: 8.5px; border: 1px solid #000; }
-.tag.strong { font-weight: bold; border-width: 2px; }
-.tag.mid { font-style: italic; }
-.tag.weak { color: #555; border-color: #999; }
-.blank { display: inline-block; min-width: 120px; border-bottom: 1px solid #999; }
-.chk { font-size: 12px; }
+       font-size: 10pt; line-height: 1.25; color: #000; margin: 0; }
+h1 { font-size: 14pt; margin: 0 0 1mm; }
+h1 .date { font-weight: normal; color: #555; font-size: 10pt; }
+.sub { color: #555; font-size: 8pt; margin: 0 0 3mm; }
+h2 { font-size: 12pt; margin: 5mm 0 1.5mm; padding-bottom: 1mm; border-bottom: 1.2pt solid #000; break-after: avoid; }
+h2:first-of-type { margin-top: 2mm; }
+p { margin: 1mm 0; }
+ul { margin: 1mm 0 2mm; padding-left: 5mm; }
+li { margin: 0.4mm 0; }
+.why { color: #444; font-size: 8pt; }
 .muted { color: #666; }
-.note { color: #555; font-size: 9px; }
-.two { display: flex; gap: 12px; }
-.two > div { flex: 1; }
-small { font-size: 8.5px; }
+.note { color: #555; font-size: 8.5pt; margin: 0.5mm 0; }
+table { width: 100%; border-collapse: collapse; margin: 1.5mm 0; font-size: 9pt; }
+th, td { padding: 2px 6px; text-align: left; border: none; border-bottom: 0.5pt solid #bbb; vertical-align: top; }
+thead th { border-bottom: 1pt solid #000; font-weight: 600; }
+tr { break-inside: avoid; }
+.num { text-align: right; white-space: nowrap; }
+.tag { display: inline-block; padding: 0 3px; font-size: 7.5pt; border: 0.7pt solid #000; }
+.tag.strong { font-weight: bold; border-width: 1.4pt; }
+.tag.mid { font-style: italic; }
+.tag.weak { color: #666; border-color: #999; }
+.blank { display: inline-block; min-width: 100px; border-bottom: 0.5pt solid #999; }
+.chk { font-size: 11pt; }
+small { font-size: 8pt; }
+.cols { display: flex; gap: 7mm; align-items: flex-start; }
+.cols > .col { flex: 1; min-width: 0; break-inside: avoid; }
+.col h3 { font-size: 10pt; margin: 0 0 1mm; padding-bottom: 0.6mm; border-bottom: 0.7pt solid #888; }
+.page-break { break-after: page; page-break-after: always; height: 0; overflow: hidden; }
+.ref-head { font-size: 8.5pt; color: #555; letter-spacing: .08em; margin: 0 0 2mm; }
+.run-header, .run-footer { display: none; }
+@media print {
+  .run-header, .run-footer { display: block; position: fixed; left: 10mm; right: 10mm; font-size: 8pt; color: #555; }
+  .run-header { top: 5mm; }
+  .run-header .r { float: right; }
+  .run-footer { bottom: 5mm; text-align: right; }
+}
 """
 
 
@@ -525,13 +546,23 @@ def h_prev_actions(prev_todos, cur_p, prev_p):
     return "".join(parts)
 
 
-def h_this_round(html_count, problem_count, commit_count):
-    return ("<h2>이번 회차 요약</h2>"
-            "<ul>"
-            "<li>페이지 <b>%d개</b> — 사이트 전체 규모 <span class='why'>(콘텐츠 자산 수)</span></li>"
-            "<li>점검 문제 <b>%d건</b> — 지금 손봐야 할 오류 <span class='why'>(0에 가까울수록 좋음)</span></li>"
-            "<li>최근 2주 커밋 <b>%d개</b> — 실제 작업량 <span class='why'>(개선 활동 빈도)</span></li>"
-            "</ul>" % (html_count, problem_count, commit_count))
+def h_this_round(html_count, problem_count, commit_count, cur_q):
+    parts = ["<h2>이번 회차 요약</h2><ul>"]
+    parts.append("<li>페이지 <b>%d개</b> — 사이트 전체 규모 <span class='why'>(콘텐츠 자산 수)</span></li>" % html_count)
+    parts.append("<li>점검 문제 <b>%d건</b> — 지금 손봐야 할 오류 <span class='why'>(0에 가까울수록 좋음)</span></li>" % problem_count)
+    parts.append("<li>최근 2주 커밋 <b>%d개</b> — 실제 작업량 <span class='why'>(개선 활동 빈도)</span></li>" % commit_count)
+    if cur_q:
+        impr = sum(m["impr"] for m in cur_q.values())
+        clk = sum(m["clicks"] for m in cur_q.values())
+        ctr = (clk / impr * 100) if impr else 0.0
+        avgpos = (sum(m["pos"] * m["impr"] for m in cur_q.values()) / impr) if impr else 0.0
+        parts.append("<li>검색 노출 <b>%d</b> · 클릭 <b>%d</b> · CTR <b>%.1f%%</b> · 평균순위 <b>%.1f</b> <span class='why'>(이번 회차 GSC 검색어 합계)</span></li>"
+                     % (int(impr), int(clk), ctr, avgpos))
+        parts.append("<li>순위 잡힌 검색어 <b>%d개</b> <span class='why'>(노출이 한 번이라도 잡힌 쿼리 수)</span></li>" % len(cur_q))
+    else:
+        parts.append("<li class='muted'>GSC 데이터 없음 — 노출·클릭·CTR·순위 집계 불가</li>")
+    parts.append("</ul>")
+    return "".join(parts)
 
 
 def h_rank_change(q_rounds):
@@ -551,6 +582,9 @@ def h_rank_change(q_rounds):
         else:
             news.append((q, m["pos"]))
     ups.sort(key=lambda x: -x[1]); downs.sort(key=lambda x: -x[1])
+    if not ups and not downs and not news:
+        parts.append("<p class='muted'>해당 없음 (직전 회차 대비 순위 변동 없음)</p>")
+        return "".join(parts)
     def line(lst, fmt):
         return ", ".join(fmt(x) for x in lst) if lst else "없음"
     parts.append("<ul>")
@@ -564,37 +598,85 @@ def h_rank_change(q_rounds):
     return "".join(parts)
 
 
+def zeroclick_tier(pos):
+    """노출 있는데 클릭 0인 항목을 순위 구간으로 판정.
+    반환: (라벨, 설명) 또는 None(31위+ = 판단 불가라 경고에서 제외)."""
+    if pos <= 10:
+        return ("제목·설명 문제", "고치면 바로 효과 — 1~10위인데 클릭이 없음")
+    if pos <= 30:
+        return ("순위를 더 올려야 함", "노출은 있으나 11~30위라 클릭이 안 나옴")
+    return None
+
+
 def h_push_now(q_rounds, p_rounds):
     parts = ["<h2>지금 밀어야 할 것</h2>"]
     if not q_rounds and not p_rounds:
-        parts.append('<p class="note">GSC 데이터가 없어 자동 추출 불가. (data/gsc/ CSV 필요)</p>')
+        parts.append('<p class="muted">해당 없음 (GSC 데이터가 없어 자동 추출 불가 — data/gsc/ CSV 필요)</p>')
         return "".join(parts)
     cur_q = q_rounds[-1][1] if q_rounds else {}
     cur_p = p_rounds[-1][1] if p_rounds else {}
     prev_p = p_rounds[-2][1] if len(p_rounds) >= 2 else {}
-    parts.append("<ul>")
-    # 11~20위
-    band = sorted([(q, m) for q, m in cur_q.items() if 10 < m["pos"] <= 20],
-                  key=lambda kv: kv[1]["pos"])
-    if band:
-        for q, m in band:
-            parts.append("<li>검색어 <b>%s</b> — 순위 %.1f, 노출 %d <span class='why'>(1페이지 진입 후보)</span></li>"
-                         % (esc(q), m["pos"], int(m["impr"])))
-    else:
-        parts.append("<li class='muted'>11~20위 검색어 없음</li>")
-    # 노출 20+ 클릭 0
-    zc = sorted([(f, m) for f, m in cur_p.items() if m["impr"] >= 20 and m["clicks"] == 0],
-                key=lambda kv: -kv[1]["impr"])
-    for f, m in zc:
-        parts.append("<li>페이지 <b>%s</b> — 노출 %d, 클릭 0 <span class='why'>(제목·설명이 클릭을 못 만들고 있음)</span></li>"
-                     % (esc(f), int(m["impr"])))
-    # 노출 30%+ 감소
+
+    # A) 브랜드 검색인데 5위 밖 — 별도 강조 (상호 검색은 1~3위가 정상)
+    brand_low = sorted([(q, m) for q, m in cur_q.items() if is_brand_query(q) and m["pos"] > 5],
+                       key=lambda kv: -kv[1]["impr"])
+    if brand_low:
+        parts.append("<p class='why'><b>⚠ 브랜드 검색인데 5위 밖</b> — 상호 검색은 1~3위가 정상이므로 최우선 대응 (정보형과 다른 기준)</p><ul>")
+        for q, m in brand_low[:15]:
+            parts.append("<li><b>%s</b> — 순위 %.1f · 노출 %d · 클릭 %d</li>"
+                         % (esc(q), m["pos"], int(m["impr"]), int(m["clicks"])))
+        parts.append("</ul>")
+
+    # B) 1페이지 진입 후보(11~20위) + 페이지 이슈(순위 구간별) + 노출 급감
+    li = []
+    for q, m in sorted([(q, m) for q, m in cur_q.items() if 10 < m["pos"] <= 20],
+                       key=lambda kv: kv[1]["pos"]):
+        li.append("<li>검색어 <b>%s</b> — 순위 %.1f · 노출 %d <span class='why'>(11~20위, 1페이지 진입 후보)</span></li>"
+                  % (esc(q), m["pos"], int(m["impr"])))
+    for f, m in sorted([(f, m) for f, m in cur_p.items() if m["impr"] >= 20 and m["clicks"] == 0],
+                       key=lambda kv: -kv[1]["impr"]):
+        tier = zeroclick_tier(m["pos"])
+        if not tier:
+            continue  # 31위+ 는 순위가 낮아 판단 불가 → 경고 제외
+        li.append("<li>페이지 <b>%s</b> — 노출 %d · 클릭 0 · 순위 %.1f <span class='why'>(%s — %s)</span></li>"
+                  % (esc(f), int(m["impr"]), m["pos"], tier[0], tier[1]))
     for f, cm in cur_p.items():
         pm = prev_p.get(f)
         if pm and pm["impr"] > 0 and (pm["impr"] - cm["impr"]) / pm["impr"] >= 0.30:
-            parts.append("<li>페이지 <b>%s</b> — 노출 %d→%d <span class='why'>(급감 — 원인 점검)</span></li>"
-                         % (esc(f), int(pm["impr"]), int(cm["impr"])))
-    parts.append("</ul>")
+            li.append("<li>페이지 <b>%s</b> — 노출 %d→%d <span class='why'>(급감 — 원인 점검)</span></li>"
+                      % (esc(f), int(pm["impr"]), int(cm["impr"])))
+    if li:
+        parts.append("<ul>" + "".join(li) + "</ul>")
+    else:
+        parts.append("<p class='muted'>1페이지 진입 후보·페이지 이슈: 해당 없음</p>")
+
+    # C) 좌우 2단: 클릭 먹히는 검색어 | 노출 있는데 클릭 0 (정보형, 순위 구간별·31위+ 제외)
+    clked = sorted([(q, m) for q, m in cur_q.items() if m["clicks"] > 0],
+                   key=lambda kv: -kv[1]["clicks"])[:15]
+    zcq = sorted([(q, m) for q, m in cur_q.items()
+                  if not is_brand_query(q) and m["impr"] >= 10 and m["clicks"] == 0 and m["pos"] <= 30],
+                 key=lambda kv: kv[1]["pos"])[:15]
+
+    def col_click(title, items):
+        h = "<div class='col'><h3>%s</h3>" % title
+        h += ("<ul>" + "".join("<li>✔ <b>%s</b> — 클릭 %d · 노출 %d · 순위 %.1f</li>"
+              % (esc(q), int(m["clicks"]), int(m["impr"]), m["pos"]) for q, m in items) + "</ul>") \
+            if items else "<p class='muted'>해당 없음</p>"
+        return h + "</div>"
+
+    def col_zero(title, items):
+        h = "<div class='col'><h3>%s</h3>" % title
+        if items:
+            h += "<ul>" + "".join("<li><b>%s</b> — 노출 %d · 순위 %.1f <span class='why'>(%s)</span></li>"
+                 % (esc(q), int(m["impr"]), m["pos"], zeroclick_tier(m["pos"])[0]) for q, m in items) + "</ul>"
+        else:
+            h += "<p class='muted'>해당 없음</p>"
+        return h + "</div>"
+
+    parts.append("<div class='cols'>")
+    parts.append(col_click("클릭이 먹히는 검색어 (실제 유입)", clked))
+    parts.append(col_zero("노출 있는데 클릭 0 (정보형 · 31위+ 제외)", zcq))
+    parts.append("</div>")
     return "".join(parts)
 
 
@@ -638,24 +720,80 @@ def h_todos(todos):
     return "".join(parts)
 
 
+# 상호(브랜드)가 들어간 검색어 판별용 토큰 — 세 사이트 상호를 모두 포함
+BRAND_TOKENS = ["엘리트", "사라있네", "사라 있네", "달토", "달리는토끼", "달리는 토끼",
+                "도파민", "유앤미"]
+
+
+def is_brand_query(q):
+    ql = (q or "").replace(" ", "")
+    return any(tok.replace(" ", "") in ql for tok in BRAND_TOKENS)
+
+
+def h_query_types(q_rounds):
+    parts = ["<h2>검색어 상세 — 브랜드형 · 정보형</h2>"]
+    cur_q = q_rounds[-1][1] if q_rounds else {}
+    if not cur_q:
+        parts.append('<p class="muted">해당 없음 (GSC 데이터가 없어 분류 불가)</p>')
+        return "".join(parts)
+    brand = sorted([(q, m) for q, m in cur_q.items() if is_brand_query(q)], key=lambda kv: kv[1]["pos"])
+    info = sorted([(q, m) for q, m in cur_q.items() if not is_brand_query(q)], key=lambda kv: -kv[1]["impr"])[:20]
+    parts.append("<p class='note'>브랜드형 <b>%d개</b> · 정보형 <b>%d개</b> "
+                 "(브랜드형=상호 포함 검색어라 순위 낮으면 문제, 정보형=그 외)</p>" % (len(brand), len(cur_q) - len(brand)))
+
+    def qtable(rows, order):
+        h = "<table><thead><tr><th>검색어</th><th class='num'>순위</th><th class='num'>노출</th><th class='num'>클릭</th></tr></thead><tbody>"
+        for q, m in rows:
+            warn = " <b>⚠</b>" if (order == "brand" and m["pos"] > 5) else ""
+            h += "<tr><td>%s%s</td><td class='num'>%.1f</td><td class='num'>%d</td><td class='num'>%d</td></tr>" \
+                 % (esc(q), warn, m["pos"], int(m["impr"]), int(m["clicks"]))
+        return h + "</tbody></table>"
+
+    parts.append("<div class='cols'>")
+    b = "<div class='col'><h3>브랜드형 — 전부 (⚠=순위 5위 밖)</h3>"
+    b += qtable(brand, "brand") if brand else "<p class='muted'>해당 없음</p>"
+    parts.append(b + "</div>")
+    i = "<div class='col'><h3>정보형 — 노출 상위 (최대 20)</h3>"
+    i += qtable(info, "info") if info else "<p class='muted'>해당 없음</p>"
+    parts.append(i + "</div>")
+    parts.append("</div>")
+    return "".join(parts)
+
+
 def build_summary_html(today, prev_todos, cur_p_rounds, cur_q_rounds,
                        html_count, problem_count, commit_count,
-                       cur_problems, todos):
+                       cur_problems, todos, next_round):
     cur_p = cur_p_rounds[-1][1] if cur_p_rounds else {}
     prev_p = cur_p_rounds[-2][1] if len(cur_p_rounds) >= 2 else {}
-    body = [
+    cur_q = cur_q_rounds[-1][1] if cur_q_rounds else {}
+
+    run_header = ("<div class='run-header'>%s · %s 회차<span class='r'>2주 점검 요약</span></div>"
+                  % (esc(SITE_NAME), esc(today)))
+    run_footer = "<div class='run-footer'>다음 회차 예정일: %s</div>" % esc(next_round)
+
+    # 1장 — 판단과 행동 (반드시 한 장)
+    page1 = [
         "<h1>%s <span class='date'>· 2주 점검 요약 %s</span></h1>" % (esc(SITE_NAME), esc(today)),
-        "<p class='sub'>브라우저에서 Ctrl+P → A4 세로로 인쇄하세요. 흑백 인쇄 기준으로 만들었습니다.</p>",
+        "<p class='sub'>1장은 판단·행동용(한 장). 자세한 데이터는 2장 참고. Ctrl+P → A4 세로 인쇄.</p>",
         h_prev_actions(prev_todos, cur_p, prev_p),
-        h_this_round(html_count, problem_count, commit_count),
-        h_rank_change(cur_q_rounds),
+        h_this_round(html_count, problem_count, commit_count, cur_q),
         h_push_now(cur_q_rounds, cur_p_rounds),
-        h_fix(cur_problems, cur_p_rounds),
         h_todos(todos),
     ]
+    # 2장 이후 — 참고 데이터
+    page2 = [
+        "<p class='ref-head'>참고 데이터 — %s · %s 회차 (자세히 볼 때)</p>" % (esc(SITE_NAME), esc(today)),
+        h_query_types(cur_q_rounds),
+        h_fix(cur_problems, cur_p_rounds),
+        h_rank_change(cur_q_rounds),
+    ]
+    body = (run_header + "\n" + run_footer + "\n"
+            + "\n".join(page1)
+            + "\n<div class='page-break'></div>\n"
+            + "\n".join(page2))
     return ("<!doctype html>\n<html lang='ko'>\n<head>\n<meta charset='utf-8'>\n"
             "<title>%s 2주 요약 %s</title>\n<style>%s</style>\n</head>\n<body>\n%s\n</body>\n</html>\n"
-            % (esc(SITE_NAME), esc(today), CSS, "\n".join(body)))
+            % (esc(SITE_NAME), esc(today), CSS, body))
 
 
 # ── main ─────────────────────────────────────────────────
@@ -712,9 +850,10 @@ def main():
         f.write(md)
 
     # 2) 프린트용 요약본 HTML
+    next_round = (datetime.date.fromisoformat(today) + datetime.timedelta(days=PERIOD_DAYS)).isoformat()
     summary = build_summary_html(today, prev_todos, p_rounds, q_rounds,
                                  html_count, problem_count, commit_count,
-                                 cur_problems, todos)
+                                 cur_problems, todos, next_round)
     html_path = os.path.join(reports_dir, "%s-summary.html" % today)
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(summary)
