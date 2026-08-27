@@ -118,6 +118,17 @@ img{max-width:100%;display:block}
 .p-btns .primary{background:var(--blue);color:#fff}
 .p-btns .primary:active{transform:scale(.97)}
 .p-btns .ghost{background:#1a1a1a;color:var(--ink);border:1px solid var(--line)}
+.cta-row{display:flex;gap:8px;margin-top:14px}
+.cta-row a{flex:1 1 0;min-width:0;text-align:center;padding:10px 0;border-radius:9px;font-weight:700;line-height:1.35;transition:.25s;display:flex;flex-direction:column;gap:1px}
+.cta-row a b{font-size:.9rem}
+.cta-row a span{font-size:.72rem;font-weight:400;opacity:.82}
+.cta-row .cta-tel{background:var(--blue);color:#fff}
+.cta-row .cta-kko{background:#1a1a1a;color:var(--ink);border:1px solid var(--line)}
+.cta-row a:active{transform:scale(.97)}
+.new-open{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding:11px 12px;border-radius:9px;background:linear-gradient(90deg,rgba(107,163,214,.16),rgba(107,163,214,.05));border:1px solid var(--line);color:var(--ink);font-size:.8rem;font-weight:700;text-align:center;text-decoration:none}
+.new-open b{color:var(--blue)}
+.new-open span{font-weight:400;opacity:.8;font-size:.74rem}
+@media(max-width:380px){.cta-row{flex-direction:column}}
 
 /* ===== 스토리 하이라이트 ===== */
 .stories{
@@ -261,8 +272,11 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
       어디서 1차를 하셨는지에 따라 답이 달라집니다 🍸<br>
       <span class="tag">#강남가라오케 #신사가라오케 #논현가라오케 #역삼가라오케 #선릉가라오케</span>
     </div>
+    <div class="cta-row">
+      <a class="cta-tel" href="tel:010-8145-1911"><b>📞 전화 문의</b><span>010-8145-1911</span></a>
+      <a class="cta-kko" href="https://open.kakao.com/o/sz2MASAi"><b>💬 카톡 문의</b><span>24시간 상담</span></a>
+    </div>
     <div class="p-btns">
-      <a class="primary" href="https://open.kakao.com/o/sz2MASAi">💬 문의하기</a>
       <a class="ghost" href="venues.html">업소 안내</a>
       <a class="ghost" href="how-to-choose.html">어디가 맞을까</a>
       <a class="ghost" href="price.html">가격 안내</a>
@@ -343,7 +357,7 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
     <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
     <div class="likes">좋아요 803개</div>
     <div class="caption">
-      <b>elite.gangnam</b>테헤란로에서 저녁 하셨다면 이동 부담이 거의 없어요.
+      <b>elite.gangnam</b>테헤란로에서 저녁 하셨다면 이동 부담이 거의 없어요. 이번 주 역삼에 새로 문을 연 <a href="venue-aura.html">아우라</a>도 바로 이 지역이에요.
       <span class="tags">#역삼가라오케 #테헤란로 #강남회식</span>
     </div>
   </article>

@@ -134,6 +134,17 @@ img{max-width:100%;display:block}
 .p-btns .primary{background:var(--blue);color:#fff}
 .p-btns .primary:active{transform:scale(.97)}
 .p-btns .ghost{background:#1a1a1a;color:var(--ink);border:1px solid var(--line)}
+.cta-row{display:flex;gap:8px;margin-top:14px}
+.cta-row a{flex:1 1 0;min-width:0;text-align:center;padding:10px 0;border-radius:9px;font-weight:700;line-height:1.35;transition:.25s;display:flex;flex-direction:column;gap:1px}
+.cta-row a b{font-size:.9rem}
+.cta-row a span{font-size:.72rem;font-weight:400;opacity:.82}
+.cta-row .cta-tel{background:var(--blue);color:#fff}
+.cta-row .cta-kko{background:#1a1a1a;color:var(--ink);border:1px solid var(--line)}
+.cta-row a:active{transform:scale(.97)}
+.new-open{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding:11px 12px;border-radius:9px;background:linear-gradient(90deg,rgba(107,163,214,.16),rgba(107,163,214,.05));border:1px solid var(--line);color:var(--ink);font-size:.8rem;font-weight:700;text-align:center;text-decoration:none}
+.new-open b{color:var(--blue)}
+.new-open span{font-weight:400;opacity:.8;font-size:.74rem}
+@media(max-width:380px){.cta-row{flex-direction:column}}
 
 /* ===== 스토리 하이라이트 ===== */
 .stories{
@@ -321,8 +332,12 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
       처음이라도 괜찮아요. 가격부터 이용 방법까지, 피드로 쉽게 알려드려요 🥂<br>
       <span class="tag">#강남하이퍼블릭 #선릉가라오케 #강남가라오케</span>
     </div>
+    <div class="cta-row">
+      <a class="cta-tel" href="tel:010-8145-1911"><b>📞 전화 문의</b><span>010-8145-1911</span></a>
+      <a class="cta-kko" href="https://open.kakao.com/o/sz2MASAi"><b>💬 카톡 문의</b><span>24시간 상담</span></a>
+    </div>
+    <a class="new-open" href="venue-aura.html">🆕 <b>신규 오픈 · 역삼 아우라</b> <span>8월 25일 · 룸 60개 새 시설</span></a>
     <div class="p-btns">
-      <a class="primary" href="https://open.kakao.com/o/sz2MASAi">💬 문의하기</a>
       <a class="ghost" href="venues.html">업소 안내</a>
       <a class="ghost" href="how-to-choose.html">어디가 맞을까</a>
       <a class="ghost" href="price.html">가격 안내</a>
@@ -340,6 +355,26 @@ footer p{font-size:.74rem;color:var(--gray);line-height:1.9}
   </div>
 
   <!-- FEED -->
+
+  <article class="post rv">
+    <div class="post-head">
+      <div class="pfp"><span>E</span></div>
+      <div class="who"><b>elite.gangnam</b><span>역삼 · 신규 오픈</span></div>
+    </div>
+    <div class="post-card pc-event">
+      <div class="deco d1"></div><div class="deco d2"></div>
+      <div class="badge">NEW</div>
+      <h3>역삼 아우라<br>문 열었습니다</h3>
+      <p>8월 25일 역삼에 새로 문을 연 자리예요.<br>룸 60개가 전부 새 시설이에요.</p>
+    </div>
+    <div class="post-actions"><span>❤️</span><span>💬</span><span>📤</span><span class="save">🔖</span></div>
+    <div class="likes">좋아요 311개</div>
+    <div class="caption">
+      <b>elite.gangnam</b>이번 주 역삼에 새로 문을 연 하이퍼블릭이에요. 룸이 전부 새 시설이라 오픈 초기의 깨끗한 컨디션을 그대로 쓰실 수 있어요.
+      <span class="more">자세한 건 <a href="venue-aura.html">역삼 아우라 안내</a>에서 →</span>
+      <span class="tags">#역삼하이퍼블릭 #역삼아우라 #역삼가라오케 #신규오픈</span>
+    </div>
+  </article>
 
   <article class="post rv">
     <div class="post-head">
